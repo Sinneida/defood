@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
+import 'package:defood/ui/views/recipes/recipes_view.dart';
+import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/views/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -14,6 +16,10 @@ class NavigationView extends StackedView<NavigationViewModel> {
       case 0:
         return const BoxesView();
       case 1:
+        return const RecipesView();
+      case 2:
+        return const ScheduleView();
+      case 3:
         return const SettingsView();
       default:
         return const BoxesView();
