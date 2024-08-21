@@ -46,7 +46,7 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
           // initialRoute: viewModel.shownPermissions
           //     ? Routes.appsView
           //     : Routes.permissionsView,
-          initialRoute: Routes.boxesView,
+          initialRoute: Routes.navigationView,
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,
           navigatorObservers: [

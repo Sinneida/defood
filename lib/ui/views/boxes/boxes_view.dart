@@ -7,17 +7,6 @@ import 'boxes_viewmodel.dart';
 class BoxesView extends StackedView<BoxesViewModel> {
   const BoxesView({Key? key}) : super(key: key);
 
-  // Widget getViewForIndex(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       return const AppsView();
-  //     case 1:
-  //       return const SettingsView();
-  //     default:
-  //       return const AppsView();
-  //   }
-  // }
-
   @override
   Widget builder(
     BuildContext context,
