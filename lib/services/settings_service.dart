@@ -2,10 +2,13 @@ import 'package:defood/services/custom_themes_service.dart';
 import 'package:defood/utils/function_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_logs/flutter_logs.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
+
+typedef AppPackageInfo = ({String appName, String buildNumber, String version});
 
 enum SettingsKey {
   monet,
@@ -116,5 +119,14 @@ class SettingsService
       );
     }
     return false;
+  }
+
+  Future<AppPackageInfo> getPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    return (
+      appName: info.appName,
+      version: info.version,
+      buildNumber: info.buildNumber,
+    );
   }
 }
