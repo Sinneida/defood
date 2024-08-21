@@ -1,0 +1,87 @@
+name: DeFood Dev Release
+            
+on:
+  push:
+    tags:
+      - "v*dev*"
+    
+
+jobs:
+  version:
+    name: Create version number
+    runs-on: ubuntu-latest
+    outputs:
+      app-version: ${{ steps.flutter_version.outputs.version_number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get Flutter Version
+        id: flutter_version
+        uses: bungabear/flutter_version_read@main
+
+  build:
+    name: Create app build
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: "17"
+          cache: 'gradle'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Get stacked CLI
+        run: dart pub global activate stacked_cli
+
+      - name: Generate dotenv
+        run: |
+          touch .env
+          echo REPO_URL='${{ vars.REPO_URL }}' >> .env
+          echo UPDATE_URL='${{ vars.UPDATE_URL }}' >> .env
+
+      - name: Run build_runner
+        run: stacked generate
+
+      - name: Start release build
+        run: flutter build apk --split-per-abi --target-platform android-arm,android-arm64
+
+      - name: Sign APK
+        id: sign_apk
+        uses: ilharp/sign-android-release@v1
+        with:
+          releaseDir: build/app/outputs/apk/release
+          signingKey: ${{ secrets.KEYSTORE_BASE64 }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyAlias: ${{ secrets.KEYSTORE_PASSWORD_ALIAS }}
+          keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+
+      - name: Add version to APK - arm64
+        run: mv build/app/outputs/apk/release/app-arm64-v8a-release-signed.apk defood-arm64-v8a-${{ needs.version.outputs.app-version }}.apk
+
+      - name: Add version to APK - arm32
+        run: mv build/app/outputs/apk/release/app-armeabi-v7a-release-signed.apk defood-armeabi-v7a-${{ needs.version.outputs.app-version }}.apk
+
+      - name: Publish release APK
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          files: |
+            defood-arm64-v8a-${{ needs.version.outputs.app-version }}.apk
+            defood-armeabi-v7a-${{ needs.version.outputs.app-version }}.apk
+
