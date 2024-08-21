@@ -20,6 +20,7 @@ enum SettingsKey {
 
 const defaultDirPath = '/storage/emulated/0/Download/DeFood';
 
+// TODO: Move some methods/props to parent class
 class SettingsService
     with ListenableServiceMixin
     implements InitializableDependency {
