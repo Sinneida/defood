@@ -1,3 +1,3 @@
-# defood
+# DeFood
 
-A new Flutter project.
+Flutter app which allows for easy managing of your food.
