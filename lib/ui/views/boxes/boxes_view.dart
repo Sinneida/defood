@@ -2,15 +2,26 @@ import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'home_viewmodel.dart';
+import 'boxes_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+class BoxesView extends StackedView<BoxesViewModel> {
+  const BoxesView({Key? key}) : super(key: key);
+
+  // Widget getViewForIndex(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       return const AppsView();
+  //     case 1:
+  //       return const SettingsView();
+  //     default:
+  //       return const AppsView();
+  //   }
+  // }
 
   @override
   Widget builder(
     BuildContext context,
-    HomeViewModel viewModel,
+    BoxesViewModel viewModel,
     Widget? child,
   ) {
     return const Scaffold(
@@ -26,7 +37,7 @@ class HomeView extends StackedView<HomeViewModel> {
             ),
           ),
           PlaceholderText(
-            text: ['No apps 😔', 'You can add new one below!'],
+            text: ['No boxes 😔', 'You can add new one below!'],
           )
         ],
       ),
@@ -34,8 +45,8 @@ class HomeView extends StackedView<HomeViewModel> {
   }
 
   @override
-  HomeViewModel viewModelBuilder(
+  BoxesViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      HomeViewModel();
+      BoxesViewModel();
 }
