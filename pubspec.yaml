@@ -1,10 +1,10 @@
 name: defood
 description: An app for managing your food
-publish_to: 'none'
-version: 0.1.0-dev1
+publish_to: "none"
+version: 0.1.0-dev2
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   dio: ^5.6.0
@@ -41,4 +41,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-

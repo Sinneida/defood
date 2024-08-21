@@ -1,3 +1,4 @@
+import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -12,10 +13,22 @@ class RecipesView extends StackedView<RecipesViewModel> {
     RecipesViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 90,
+            automaticallyImplyLeading: false,
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.only(bottom: 16, left: 20),
+              title: Text('Recipes'),
+            ),
+          ),
+          PlaceholderText(
+            text: ['No recipes 😔', 'You can add new one below!'],
+          )
+        ],
       ),
     );
   }

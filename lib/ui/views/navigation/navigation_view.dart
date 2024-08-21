@@ -48,6 +48,14 @@ class NavigationView extends StackedView<NavigationViewModel> {
             label: 'Boxes',
           ),
           NavigationDestination(
+            icon: Icon(Icons.receipt),
+            label: 'Recipes',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.schedule),
+            label: 'Schedule',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
