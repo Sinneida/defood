@@ -28,6 +28,7 @@ import 'package:defood/ui/views/schedule/schedule_view.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: CustomThemesService),
     InitializableSingleton(classType: SettingsService),
     LazySingleton(classType: PathsService),
