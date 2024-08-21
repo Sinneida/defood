@@ -10,12 +10,18 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
 import 'package:defood/ui/views/settings/settings_view.dart';
+import 'package:defood/ui/views/navigation/navigation_view.dart';
+import 'package:defood/ui/views/recipes/recipes_view.dart';
+import 'package:defood/ui/views/schedule/schedule_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     MaterialRoute(page: BoxesView),
     MaterialRoute(page: SettingsView),
+    MaterialRoute(page: NavigationView),
+    MaterialRoute(page: RecipesView),
+    MaterialRoute(page: ScheduleView),
 // @stacked-route
   ],
   dependencies: [
