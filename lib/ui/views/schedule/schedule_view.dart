@@ -22,7 +22,7 @@ class ScheduleView extends StackedView<ScheduleViewModel> {
             automaticallyImplyLeading: false,
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.only(bottom: 16, left: 20),
-              title: Text('Boxes'),
+              title: Text('Schedule'),
             ),
           ),
           PlaceholderText(
