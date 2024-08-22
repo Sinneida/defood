@@ -1,3 +1,4 @@
+import 'package:defood/ui/views/settings/items/about_app/about_app.dart';
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -13,10 +14,10 @@ class SettingsView extends StackedView<SettingsViewModel> {
     SettingsViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
+    return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: true,
             expandedHeight: 90,
             automaticallyImplyLeading: false,
@@ -25,9 +26,18 @@ class SettingsView extends StackedView<SettingsViewModel> {
               title: Text('Settings'),
             ),
           ),
-          PlaceholderText(
-            text: ['No settings 😔'],
-          )
+          SliverList(
+            delegate: SliverChildListDelegate.fixed([
+              ListView(
+                padding: const EdgeInsets.only(bottom: 30),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  const AboutApp(),
+                ],
+              )
+            ]),
+          ),
         ],
       ),
     );
