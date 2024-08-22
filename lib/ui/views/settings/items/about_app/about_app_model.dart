@@ -1,6 +1,7 @@
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/app/app.snackbar.dart';
-import 'package:defood/services/settings_service.dart';
+import 'package:defood/services/settings/about_settings_service.dart';
+import 'package:defood/services/settings/appearance_settings_service.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -8,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutAppModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
-  final _settings = locator<SettingsService>();
+  final _settings = locator<AboutSettingsService>();
   final _snackbar = locator<SnackbarService>();
 
   bool get devOptions => _settings.devOptions;
@@ -27,7 +28,7 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   Future<void> setDevOptions(bool val) async {
-    _settings.setPref<bool>(SettingsKey.devOptions, val);
+    _settings.setPref<bool>(AboutSettingsKey.devOptions, val);
     await _snackbar.showCustomSnackBar(
       message: getDevOptionsSnackMessage(),
       variant: SnackbarType.info,

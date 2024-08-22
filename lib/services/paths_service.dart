@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/models/errors/io_error.dart';
-import 'package:defood/services/settings_service.dart';
+import 'package:defood/services/settings/about_settings_service.dart';
 
 class PathsService {
-  final _settings = locator<SettingsService>();
+  final _settings = locator<AboutSettingsService>();
 
   Future<Directory> getFolderToSave() async {
     try {
