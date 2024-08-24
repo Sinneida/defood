@@ -1,4 +1,6 @@
 import 'package:defood/ui/views/settings/items/about_app/about_app.dart';
+import 'package:defood/ui/views/settings/items/check_updates/check_updates.dart';
+import 'package:defood/ui/widgets/settings/common/group_header.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -32,6 +34,8 @@ class SettingsView extends StackedView<SettingsViewModel> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
+                  GroupHeader(name: 'About'),
+                  CheckUpdates(),
                   AboutApp(),
                 ],
               )

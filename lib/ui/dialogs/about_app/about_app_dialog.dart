@@ -21,12 +21,13 @@ class AboutAppDialog extends StackedView<AboutAppDialogModel> {
     Widget? child,
   ) {
     return AboutDialog(
-      applicationName: 'GlassDown',
+      applicationName: 'DeFood',
       applicationVersion: viewModel.version,
-      applicationIcon: const CircleAvatar(
-        radius: 28,
-        backgroundImage: AssetImage('assets/icon/glassdown.png'),
-      ),
+      // TODO: Enable when icon is created
+      // applicationIcon: const CircleAvatar(
+      //   radius: 28,
+      //   backgroundImage: AssetImage('assets/icon/glassdown.png'),
+      // ),
       children: [
         Text.rich(
           TextSpan(
