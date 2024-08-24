@@ -58,7 +58,7 @@ jobs:
         run: stacked generate
 
       - name: Start release build
-        run: flutter build apk --split-per-abi --target-platform android-arm,android-arm64
+        run: flutter build apk --obfuscate --split-per-abi --target-platform android-arm,android-arm64
 
       - name: Sign APK
         id: sign_apk

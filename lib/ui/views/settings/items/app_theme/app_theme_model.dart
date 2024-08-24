@@ -18,7 +18,8 @@ class AppThemeModel extends BaseViewModel {
 
   void updateValue(ThemeMode mode, int index) {
     final themeFromIndex = ThemeMode.values.elementAt(index);
-    _appearanceFragment.setPref<ThemeMode>(AppearanceSettingsKey.themeMode ,themeFromIndex);
+    _appearanceFragment.setPref<ThemeMode>(
+        AppearanceSettingsKey.themeMode, themeFromIndex);
     rebuildUi();
   }
 
