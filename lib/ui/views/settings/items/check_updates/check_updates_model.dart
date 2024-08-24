@@ -1,7 +1,6 @@
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
-import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/services/updater_service.dart';
 import 'package:defood/ui/bottom_sheets/updater/update_sheet.dart';
 import 'package:defood/utils/function_name.dart';
@@ -12,7 +11,6 @@ import 'package:stacked_services/stacked_services.dart';
 class CheckUpdatesModel extends ReactiveViewModel {
   final _updater = locator<UpdaterService>();
   final _snackbar = locator<SnackbarService>();
-  final _settings = locator<SettingsService>();
   final _aboutFragment = locator<AboutSettingsService>();
 
   bool get devOptions => _aboutFragment.devOptions;
