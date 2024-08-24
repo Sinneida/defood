@@ -53,6 +53,9 @@ jobs:
           touch .env
           echo REPO_URL='${{ vars.REPO_URL }}' >> .env
           echo UPDATE_URL='${{ vars.UPDATE_URL }}' >> .env
+          echo API_URL='${{ secrets.API_URL }}' >> .env
+          echo API_KEY='${{ secrets.API_KEY }}' >> .env
+
 
       - name: Run build_runner
         run: stacked generate
