@@ -13,9 +13,21 @@ enum AboutSettingsKey {
 final class AboutSettingsService
     with ListenableServiceMixin
     implements SettingsFragment, InitializableDependency {
+  AboutSettingsService() {
+    listenToReactiveValues([
+      _shownPermissions,
+      _disableUpdates,
+    ]);
+  }
+
   @override
   Future<void> init() async {
-    // TODO: Load items from storage
+    _shownPermissions =
+        _settings.prefs.getBool(AboutSettingsKey.shownPermissions.name) ??
+            _shownPermissions;
+    _disableUpdates =
+        _settings.prefs.getBool(AboutSettingsKey.disableUpdates.name) ??
+            _disableUpdates;
   }
 
   final _settings = locator<SettingsService>();

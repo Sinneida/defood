@@ -1,12 +1,10 @@
 import 'package:defood/services/settings/base/helpers.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 final class SettingsService
     with SettingsHelpers
     implements InitializableDependency {
-  @protected
   late final SharedPreferencesWithCache prefs;
 
   final String _appSavePath = '/storage/emulated/0/Download/DeFood';

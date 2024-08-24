@@ -1,4 +1,5 @@
 import 'package:defood/utils/function_name.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -29,5 +30,10 @@ mixin SettingsHelpers {
       version: info.version,
       buildNumber: info.buildNumber,
     );
+  }
+
+  Future<bool> checkForAndroid12Plus() async {
+    final deviceInfo = await DeviceInfoPlugin().androidInfo;
+    return deviceInfo.version.sdkInt >= 31;
   }
 }
