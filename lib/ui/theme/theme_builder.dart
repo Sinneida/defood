@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:defood/utils/dynamic_color_fix.dart';
 
 class ThemeBuilder extends StackedView<ThemeBuilderModel> {
   const ThemeBuilder({super.key});
@@ -19,8 +20,9 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
         final monetPresent = lightDynamic != null && darkDynamic != null;
 
         if (monetPresent && viewModel.monetEnabled) {
-          lightScheme = lightDynamic.harmonized();
-          darkScheme = darkDynamic.harmonized();
+          lightScheme = generateColorScheme(lightDynamic.primary);
+          darkScheme =
+              generateColorScheme(darkDynamic.primary, Brightness.dark);
         } else {
           lightScheme = viewModel.getTheme(viewModel.customTheme).lightScheme;
           darkScheme = viewModel.getTheme(viewModel.customTheme).darkScheme;
