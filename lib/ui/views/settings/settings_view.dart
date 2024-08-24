@@ -1,5 +1,11 @@
 import 'package:defood/ui/views/settings/items/about_app/about_app.dart';
+import 'package:defood/ui/views/settings/items/app_theme/app_theme.dart';
 import 'package:defood/ui/views/settings/items/check_updates/check_updates.dart';
+import 'package:defood/ui/views/settings/items/custom_font_list/custom_font_list.dart';
+import 'package:defood/ui/views/settings/items/custom_theme/custom_theme.dart';
+import 'package:defood/ui/views/settings/items/import_font/import_font.dart';
+import 'package:defood/ui/views/settings/items/monet_theme/monet_theme.dart';
+import 'package:defood/ui/widgets/common/divider.dart';
 import 'package:defood/ui/widgets/settings/common/group_header.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -34,6 +40,13 @@ class SettingsView extends StackedView<SettingsViewModel> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
+                  GroupHeader(name: 'Appearance'),
+                  AppTheme(),
+                  MonetTheme(),
+                  CustomTheme(),
+                  ImportFont(),
+                  CustomFontList(),
+                  ItemDivider(),
                   GroupHeader(name: 'About'),
                   CheckUpdates(),
                   AboutApp(),
