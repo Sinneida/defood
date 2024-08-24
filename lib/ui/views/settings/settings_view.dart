@@ -1,5 +1,4 @@
 import 'package:defood/ui/views/settings/items/about_app/about_app.dart';
-import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -32,8 +31,8 @@ class SettingsView extends StackedView<SettingsViewModel> {
                 padding: const EdgeInsets.only(bottom: 30),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const AboutApp(),
+                children: const [
+                  AboutApp(),
                 ],
               )
             ]),

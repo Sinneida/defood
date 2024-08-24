@@ -1,3 +1,4 @@
+import 'package:defood/app/app.locator.dart';
 import 'package:defood/services/settings/base/interfaces.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:stacked/stacked.dart';
@@ -9,13 +10,15 @@ enum AboutSettingsKey {
   devOptions,
 }
 
-final class AboutSettingsService extends SettingsService
+final class AboutSettingsService
     with ListenableServiceMixin
-    implements InitializableDependency, Settings {
+    implements SettingsFragment, InitializableDependency {
   @override
   Future<void> init() async {
     // TODO: Load items from storage
   }
+
+  final _settings = locator<SettingsService>();
 
   bool _devOptions = false;
   bool get devOptions => _devOptions;
@@ -28,7 +31,7 @@ final class AboutSettingsService extends SettingsService
 
   @override
   Future<void> setPref<T extends Object>(Enum key, T value,
-      [bool saveToDisk = true]) async {
+      [bool save = true]) async {
     switch (key) {
       case AboutSettingsKey.shownPermissions:
         _shownPermissions = value as bool;
@@ -37,8 +40,8 @@ final class AboutSettingsService extends SettingsService
       case AboutSettingsKey.devOptions:
         _devOptions = value as bool;
     }
-    if (saveToDisk == true) {
-      await super.savePref<T>(key, value);
+    if (save == true) {
+      await _settings.savePref<T>(key, value);
     }
     notifyListeners();
   }

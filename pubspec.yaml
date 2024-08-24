@@ -1,7 +1,7 @@
 name: defood
 description: An app for managing your food
 publish_to: "none"
-version: 0.1.0-dev2
+version: 0.1.0-dev3
 
 environment:
   sdk: ">=3.0.3 <4.0.0"

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-base class SettingsService
+final class SettingsService
     with SettingsHelpers
     implements InitializableDependency {
   @protected

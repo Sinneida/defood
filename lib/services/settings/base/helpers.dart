@@ -5,10 +5,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 typedef AppPackageInfo = ({String appName, String buildNumber, String version});
 
-/// Mixin for `SettingsBaseService` class to provide
+/// Mixin for `SettingsService` class to provide
 /// helpful methods not related explicitly to settings items
 /// themselves
-base mixin SettingsHelpers {
+mixin SettingsHelpers {
   Future<bool> installGranted() async {
     try {
       return await Permission.requestInstallPackages.status.isGranted;

@@ -6,6 +6,7 @@ import 'package:defood/models/errors/update_error.dart';
 import 'package:defood/models/update_info.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
+import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_logs/flutter_logs.dart';
@@ -19,7 +20,8 @@ class UpdaterService with ListenableServiceMixin {
     listenToReactiveValues([_downloadProgress]);
   }
 
-  final _settings = locator<AboutSettingsService>();
+  final _settings = locator<SettingsService>();
+  final _aboutFragment = locator<AboutSettingsService>();
 
   final _url = Env.updateUrl;
   final _dio = Dio(
@@ -99,7 +101,7 @@ class UpdaterService with ListenableServiceMixin {
   Future<bool> checkUpdates() async {
     try {
       final package = await PackageInfo.fromPlatform();
-      _isDev = package.version.contains('dev') || _settings.devOptions;
+      _isDev = package.version.contains('dev') || _aboutFragment.devOptions;
       _version = package.version;
 
       final result = await _dio.get<String>(_getUpdateUrl());

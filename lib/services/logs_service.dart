@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/models/errors/io_error.dart';
-import 'package:defood/services/settings/about_settings_service.dart';
+import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/utils/function_name.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:flutter_logs/flutter_logs.dart';
@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LogsService {
-  final _settings = locator<AboutSettingsService>();
+  final _settings = locator<SettingsService>();
 
   Future<Directory> getLogsDir() async {
     final appDataDir = await getExternalStorageDirectory();

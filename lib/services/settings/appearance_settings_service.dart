@@ -1,3 +1,4 @@
+import 'package:defood/app/app.locator.dart';
 import 'package:defood/services/custom_themes_service.dart';
 import 'package:defood/services/settings/base/interfaces.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
@@ -17,13 +18,15 @@ enum AppearanceSettingsKey {
 
 const defaultDirPath = '/storage/emulated/0/Download/DeFood';
 
-final class AppearanceSettingsService extends SettingsService
+final class AppearanceSettingsService
     with ListenableServiceMixin
-    implements InitializableDependency, Settings {
+    implements InitializableDependency, SettingsFragment {
   @override
   Future<void> init() async {
     // TODO: Load items from storage
   }
+
+  final _settings = locator<SettingsService>();
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
@@ -59,7 +62,7 @@ final class AppearanceSettingsService extends SettingsService
         _customFont = value as String;
     }
     if (saveToDisk == true) {
-      await super.savePref<T>(key, value);
+      await _settings.savePref<T>(key, value);
     }
     notifyListeners();
   }

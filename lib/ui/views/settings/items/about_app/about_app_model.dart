@@ -1,7 +1,9 @@
+import 'package:defood/app/app.dialogs.dart';
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
+import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,10 +11,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutAppModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
-  final _settings = locator<AboutSettingsService>();
+  final _settings = locator<SettingsService>();
+  final _aboutFragment = locator<AboutSettingsService>();
   final _snackbar = locator<SnackbarService>();
 
-  bool get devOptions => _settings.devOptions;
+  bool get devOptions => _aboutFragment.devOptions;
   bool get isRepoUrlDisabled => Env.repoUrl.isEmpty;
 
   final loadingMsg = 'Loading...';
@@ -28,7 +31,7 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   Future<void> setDevOptions(bool val) async {
-    _settings.setPref<bool>(AboutSettingsKey.devOptions, val);
+    _aboutFragment.setPref<bool>(AboutSettingsKey.devOptions, val);
     await _snackbar.showCustomSnackBar(
       message: getDevOptionsSnackMessage(),
       variant: SnackbarType.info,
@@ -49,20 +52,20 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   Future<void> showAboutDialog() async {
-    // try {
-    //   await _dialogService.showCustomDialog<void, void>(
-    //     variant: DialogType.aboutApp,
-    //     barrierDismissible: true,
-    //   );
-    //   rebuildUi();
-    // } catch (e) {
-    //   _snackbar.showCustomSnackBar(
-    //     variant: SnackbarType.info,
-    //     message: e.toString(),
-    //   );
-    // }
+    try {
+      await _dialogService.showCustomDialog<void, void>(
+        variant: DialogType.aboutApp,
+        barrierDismissible: true,
+      );
+      rebuildUi();
+    } catch (e) {
+      _snackbar.showCustomSnackBar(
+        variant: SnackbarType.info,
+        message: e.toString(),
+      );
+    }
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_settings];
+  List<ListenableServiceMixin> get listenableServices => [_aboutFragment];
 }
