@@ -1,15 +1,19 @@
 import 'package:defood/ui/theme/theme_builder.dart';
+import 'package:defood/utils/envs.dart';
 import 'package:flutter/material.dart';
-import 'package:defood/app/app.bottomsheets.dart';
 import 'package:defood/app/app.dialogs.dart';
 import 'package:defood/app/app.locator.dart';
 import 'package:flutter/services.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: Env.apiUrl,
+    anonKey: Env.apiKey,
+  );
   await setupLocator();
   setupDialogUi();
-  setupBottomSheetUi();
   runApp(const MainApp());
 }
 
