@@ -1,0 +1,8 @@
+{
+  "boxes": {
+    "name": "Boxes",
+    "add_box": "New box",
+    "no_boxes_placeholder_1": "No boxes 😟",
+    "no_boxes_placeholder_2": "You can add new one with button below!"
+  }
+}

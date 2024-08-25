@@ -1,0 +1,8 @@
+{
+  "boxes": {
+    "name": "Pudełka",
+    "add_box": "Nowe pudełko",
+    "no_boxes_placeholder_1": "Brak pudełek 😟",
+    "no_boxes_placeholder_2": "Stwórz nowe przyciskiem poniżej!"
+  }
+}

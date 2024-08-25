@@ -1,11 +1,12 @@
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:defood/gen/strings.g.dart';
 
 import 'boxes_viewmodel.dart';
 
 class BoxesView extends StackedView<BoxesViewModel> {
-  const BoxesView({Key? key}) : super(key: key);
+  const BoxesView({super.key});
 
   @override
   Widget builder(
@@ -14,25 +15,34 @@ class BoxesView extends StackedView<BoxesViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 90,
             automaticallyImplyLeading: false,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.only(bottom: 16, left: 20),
-              title: Text('Boxes'),
+              titlePadding: const EdgeInsets.only(bottom: 16, left: 20),
+              title: Text(t.boxes.name),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.account_circle),
+              )
+            ],
           ),
           PlaceholderText(
-            text: ['No boxes 😔', 'You can add new one below!'],
+            text: [
+              t.boxes.no_boxes_placeholder_1,
+              t.boxes.no_boxes_placeholder_2,
+            ],
           )
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        label: const Text('New box'),
+        label: Text(t.boxes.add_box),
         icon: const Icon(Icons.add),
       ),
     );

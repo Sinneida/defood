@@ -1,7 +1,9 @@
 import 'package:defood/app/app.router.dart';
+import 'package:defood/gen/strings.g.dart';
 import 'package:defood/ui/theme/theme_builder_model.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -54,6 +56,9 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
           navigatorObservers: [
             StackedService.routeObserver,
           ],
+          locale: TranslationProvider.of(context).flutterLocale,
+          supportedLocales: AppLocaleUtils.supportedLocales,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
         );
       },
     );
