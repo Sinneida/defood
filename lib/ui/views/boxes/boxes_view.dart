@@ -13,8 +13,8 @@ class BoxesView extends StackedView<BoxesViewModel> {
     BoxesViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
-      body: CustomScrollView(
+    return Scaffold(
+      body: const CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -29,6 +29,11 @@ class BoxesView extends StackedView<BoxesViewModel> {
             text: ['No boxes 😔', 'You can add new one below!'],
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('New box'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
