@@ -1,4 +1,4 @@
-package com.example.defood
+package com.sinneida.defood
 
 import io.flutter.embedding.android.FlutterActivity
 
