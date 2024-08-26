@@ -1,8 +1,25 @@
 {
+  "login": {
+    "name": "Login",
+    "description": "Here you can log in to your DeFood account using Google sign-in",
+    "login_button": "Log in with Google"
+  },
   "boxes": {
     "name": "Boxes",
     "add_box": "New box",
     "no_boxes_placeholder_1": "No boxes 😟",
     "no_boxes_placeholder_2": "You can add new one with button below!"
+  },
+  "recipes": {
+    "name": "Recipes",
+    "add_box": "New recipe",
+    "no_boxes_placeholder_1": "No recipes 😟",
+    "no_boxes_placeholder_2": "You can add new one with button below!"
+  },
+  "schedule": {
+    "name": "Schedule"
+  },
+  "settings": {
+    "name": "Settings"
   }
 }
