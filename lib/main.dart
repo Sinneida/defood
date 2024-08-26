@@ -5,10 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:defood/app/app.dialogs.dart';
 import 'package:defood/app/app.locator.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_logs/flutter_logs.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterLogs.initLogs(
+    logLevelsEnabled: [
+      LogLevel.ERROR,
+      LogLevel.WARNING,
+      LogLevel.SEVERE,
+      LogLevel.INFO
+    ],
+    directoryStructure: DirectoryStructure.SINGLE_FILE_FOR_DAY,
+    timeStampFormat: TimeStampFormat.TIME_FORMAT_READABLE_2,
+    logFileExtension: LogFileExtension.TXT,
+  );
   LocaleSettings.setLocale(AppLocale.en);
   await Supabase.initialize(
     url: Env.apiUrl,
