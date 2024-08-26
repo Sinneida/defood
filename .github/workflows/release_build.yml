@@ -55,7 +55,8 @@ jobs:
           echo UPDATE_URL='${{ vars.UPDATE_URL }}' >> .env
           echo API_URL='${{ secrets.API_URL }}' >> .env
           echo API_KEY='${{ secrets.API_KEY }}' >> .env
-
+          echo WEB_CLIENT_ID='${{ secrets.WEB_CLIENT_ID }}' >> .env
+          echo CLIENT_ID='${{ secrets.CLIENT_ID }}' >> .env
 
       - name: Run build_runner
         run: stacked generate
