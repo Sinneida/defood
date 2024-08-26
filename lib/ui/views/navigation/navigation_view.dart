@@ -6,6 +6,7 @@ import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/views/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:defood/gen/strings.g.dart';
 
 import 'navigation_viewmodel.dart';
 
@@ -53,22 +54,22 @@ class NavigationView extends StackedView<NavigationViewModel> {
           viewModel.setIndex(value);
         },
         selectedIndex: viewModel.currentIndex,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.inbox),
-            label: 'Boxes',
+            icon: const Icon(Icons.inbox),
+            label: t.boxes.name,
           ),
           NavigationDestination(
-            icon: Icon(Icons.receipt),
-            label: 'Recipes',
+            icon: const Icon(Icons.receipt),
+            label: t.recipes.name,
           ),
           NavigationDestination(
-            icon: Icon(Icons.schedule),
-            label: 'Schedule',
+            icon: const Icon(Icons.schedule),
+            label: t.schedule.name,
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: const Icon(Icons.settings),
+            label: t.settings.name,
           ),
         ],
       ),
