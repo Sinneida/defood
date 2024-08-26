@@ -1,3 +1,4 @@
+import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/gen/strings.g.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ class LoginView extends StackedView<LoginViewModel> {
     LoginViewModel viewModel,
     Widget? child,
   ) {
+    final snackColor = Theme.of(context).colorScheme.primary;
+    final textColor = Theme.of(context).colorScheme.onPrimary;
+    setupSnackbarUi(snackColor, textColor);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
@@ -54,7 +59,7 @@ class LoginView extends StackedView<LoginViewModel> {
                               clipBehavior: Clip.antiAlias,
                               elevation: 1,
                               child: ListTile(
-                                onTap: () => viewModel.signInWithGoogle(),
+                                onTap: () => viewModel.signIn(),
                                 leading: const Icon(Icons.login),
                                 title: Text(t.login.login_button),
                               ),
