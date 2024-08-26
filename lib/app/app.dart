@@ -1,3 +1,4 @@
+import 'package:defood/services/auth_service.dart';
 import 'package:defood/services/custom_themes_service.dart';
 import 'package:defood/services/font_importer_service.dart';
 import 'package:defood/services/logs_service.dart';
@@ -36,6 +37,7 @@ import 'package:defood/ui/views/login/login_view.dart';
     InitializableSingleton(classType: SettingsService),
     InitializableSingleton(classType: AppearanceSettingsService),
     InitializableSingleton(classType: AboutSettingsService),
+    LazySingleton(classType: AuthService),
     LazySingleton(classType: PathsService),
     LazySingleton(classType: LogsService),
     LazySingleton(classType: UpdaterService),
