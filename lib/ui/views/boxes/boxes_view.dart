@@ -26,10 +26,16 @@ class BoxesView extends StackedView<BoxesViewModel> {
               title: Text(t.boxes.name),
             ),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.account_circle),
-              )
+              if (viewModel.avatar == null)
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.account_circle),
+                )
+              else
+                CircleAvatar(
+                  radius: 16,
+                  backgroundImage: NetworkImage(viewModel.avatar!),
+                )
             ],
           ),
           PlaceholderText(
