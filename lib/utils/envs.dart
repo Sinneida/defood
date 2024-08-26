@@ -15,4 +15,10 @@ final class Env {
 
   @EnviedField(varName: 'API_KEY', obfuscate: true)
   static final String apiKey = _Env.apiKey;
+
+  @EnviedField(varName: 'WEB_CLIENT_ID', obfuscate: true)
+  static final String webClientId = _Env.webClientId;
+
+  @EnviedField(varName: 'CLIENT_ID', obfuscate: true)
+  static final String clientId = _Env.clientId;
 }
