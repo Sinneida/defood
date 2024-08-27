@@ -91,4 +91,9 @@ class LoginView extends StackedView<LoginViewModel> {
     BuildContext context,
   ) =>
       LoginViewModel();
+
+  @override
+  void onViewModelReady(LoginViewModel viewModel) {
+    viewModel.tryToLogIn();
+  }
 }
