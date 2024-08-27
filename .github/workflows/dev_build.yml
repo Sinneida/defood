@@ -61,6 +61,9 @@ jobs:
       - name: Run build_runner
         run: stacked generate
 
+      - name: Generate translations
+        run: dart run slang
+
       - name: Start release build
         run: flutter build apk --obfuscate --split-debug-info=/home/runner  --split-per-abi --target-platform android-arm,android-arm64
 
