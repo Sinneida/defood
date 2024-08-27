@@ -30,11 +30,15 @@ class BoxesView extends StackedView<BoxesViewModel> {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.account_circle),
+                  padding: const EdgeInsets.only(right: 8),
                 )
               else
-                CircleAvatar(
-                  radius: 16,
-                  backgroundImage: NetworkImage(viewModel.avatar!),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundImage: NetworkImage(viewModel.avatar!),
+                  ),
                 )
             ],
           ),
