@@ -1,7 +1,6 @@
 name: DeFood Dev Release
             
 on:
-  workflow_dispatch: 
   push:
     tags:
       - "v*dev*"
@@ -38,9 +37,6 @@ jobs:
           flutter-version: "3.24.x"
           channel: 'stable'
 
-      - name: Get dependencies
-        run: flutter pub get
-
       - name: Generate dotenv
         run: |
           touch .env
@@ -50,6 +46,9 @@ jobs:
           echo API_KEY='${{ secrets.API_KEY }}' >> .env
           echo WEB_CLIENT_ID='${{ secrets.WEB_CLIENT_ID }}' >> .env
           echo CLIENT_ID='${{ secrets.CLIENT_ID }}' >> .env
+
+      - name: Get dependencies
+        run: flutter pub get
 
       - name: Generate code files
         run: dart run build_runner build --delete-conflicting-outputs
@@ -69,7 +68,7 @@ jobs:
           echo 'storeFile=keystore.jks' >> android/key.properties
 
       - name: Start release build
-        run: flutter build apk --release --obfuscate --split-debug-info=/home/runner  --split-per-abi --target-platform android-arm,android-arm64
+        run: flutter build apk --release --obfuscate --split-debug-info=/home/runner --split-per-abi --target-platform android-arm,android-arm64
 
       - name: Sign APK
         id: sign_apk
