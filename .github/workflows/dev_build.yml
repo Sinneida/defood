@@ -66,7 +66,7 @@ jobs:
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" >> android/key.properties
-          echo "storeFile=android/app/keystore.jks" >> android/key.properties
+          echo "storeFile=keystore.jks" >> android/key.properties
 
       - name: Start release build
         run: flutter build apk --release --obfuscate --split-debug-info=/home/runner  --split-per-abi --target-platform android-arm,android-arm64
