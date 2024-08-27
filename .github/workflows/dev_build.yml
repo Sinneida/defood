@@ -1,10 +1,10 @@
 name: DeFood Dev Release
             
 on:
+  workflow_dispatch: 
   push:
     tags:
       - "v*dev*"
-  workflow_dispatch: 
     
 
 jobs:
@@ -57,19 +57,16 @@ jobs:
       - name: Generate translations
         run: dart run slang
 
-      - name: Download Android keystore
-        id: android_keystore
-        uses: timheuer/base64-to-file@v1.2.4
-        with:
-          fileName: keystore.jks
-          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
 
       - name: Create key.properties
         run: |
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" >> android/key.properties
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" >> android/key.properties
+          echo "storeFile=android/app/keystore.jks" >> android/key.properties
 
       - name: Start release build
         run: flutter build apk --release --obfuscate --split-debug-info=/home/runner  --split-per-abi --target-platform android-arm,android-arm64
