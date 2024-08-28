@@ -2,6 +2,8 @@ import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/gen/strings.g.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'login_viewmodel.dart';
@@ -23,20 +25,6 @@ class LoginView extends StackedView<LoginViewModel> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar.large(
-            pinned: true,
-            expandedHeight: 90,
-            automaticallyImplyLeading: false,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(bottom: 16, left: 20),
-              title: Text(
-                'Login',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-              ),
-            ),
-          ),
           SliverFillRemaining(
             hasScrollBody: false,
             child: Padding(
@@ -44,6 +32,26 @@ class LoginView extends StackedView<LoginViewModel> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SvgPicture.asset(
+                    'assets/images/food.svg',
+                    height: 182,
+                  ),
+                  verticalSpaceSmall,
+                  ListTile(
+                    title: Text(
+                      'DeFood',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.dotted,
+                        fontSize:
+                            Theme.of(context).textTheme.displayMedium?.fontSize,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.pattaya().fontFamily,
+                      ),
+                    ),
+                  ),
+                  verticalSpaceMedium,
                   Card.outlined(
                     child: Padding(
                         padding: const EdgeInsets.all(8),
@@ -61,7 +69,7 @@ class LoginView extends StackedView<LoginViewModel> {
                               child: ListTile(
                                 onTap: () => viewModel.signIn(),
                                 leading: const Icon(Icons.login),
-                                title: Text(t.login.login_button),
+                                title: const Text('Sign in'),
                               ),
                             ),
                             verticalSpaceTiny,
@@ -71,7 +79,7 @@ class LoginView extends StackedView<LoginViewModel> {
                               child: ListTile(
                                 onTap: () => viewModel.signOut(),
                                 leading: const Icon(Icons.logout),
-                                title: const Text('Log out'),
+                                title: const Text('Sign out'),
                               ),
                             ),
                           ],
