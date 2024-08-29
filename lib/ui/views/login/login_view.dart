@@ -52,39 +52,74 @@ class LoginView extends StackedView<LoginViewModel> {
                     ),
                   ),
                   verticalSpaceMedium,
-                  Card.outlined(
-                    child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                t.login.description,
+                  if (viewModel.isBusy)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Card.outlined(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 24,
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 64,
+                                    width: 64,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  verticalSpaceMedium,
+                                  Text(
+                                    'Logging in...',
+                                    style: TextStyle(
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.fontSize,
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            verticalSpaceTiny,
-                            Card(
-                              clipBehavior: Clip.antiAlias,
-                              elevation: 1,
-                              child: ListTile(
-                                onTap: () => viewModel.signIn(),
-                                leading: const Icon(Icons.login),
-                                title: const Text('Sign in'),
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Card.outlined(
+                      child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  t.login.description,
+                                ),
                               ),
-                            ),
-                            verticalSpaceTiny,
-                            Card(
-                              clipBehavior: Clip.antiAlias,
-                              elevation: 1,
-                              child: ListTile(
-                                onTap: () => viewModel.signOut(),
-                                leading: const Icon(Icons.logout),
-                                title: const Text('Sign out'),
+                              verticalSpaceTiny,
+                              Card(
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 1,
+                                child: ListTile(
+                                  onTap: () => viewModel.signIn(),
+                                  leading: const Icon(Icons.login),
+                                  title: const Text('Sign in'),
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                  )
+                              verticalSpaceTiny,
+                              Card(
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 1,
+                                child: ListTile(
+                                  onTap: () => viewModel.signOut(),
+                                  leading: const Icon(Icons.logout),
+                                  title: const Text('Sign out'),
+                                ),
+                              ),
+                            ],
+                          )),
+                    )
                 ],
               ),
             ),
@@ -102,6 +137,6 @@ class LoginView extends StackedView<LoginViewModel> {
 
   @override
   void onViewModelReady(LoginViewModel viewModel) {
-    viewModel.tryToLogIn();
+    viewModel.logIn();
   }
 }

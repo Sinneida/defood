@@ -1,22 +1,46 @@
 import 'package:defood/models/errors/auth_error.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:defood/utils/function_name.dart';
+import 'package:defood/utils/logger_helper.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthService {
+class AuthService with LoggerHelper {
   final _googleClient = GoogleSignIn(
     signInOption: SignInOption.standard,
     clientId: Env.clientId,
     serverClientId: Env.webClientId,
   );
 
-  final _supaBaseAuthClient = Supabase.instance.client.auth;
-  GoTrueClient get authClient => _supaBaseAuthClient;
+  final _authClient = Supabase.instance.client.auth;
+  GoTrueClient get authClient => _authClient;
 
   AuthResponse? _account;
   AuthResponse? get account => _account;
+
+  Future<bool> logIn() async {
+    // TODO: Fix busy state => loading indicator
+    try {
+      if (_authClient.currentUser != null &&
+          _authClient.currentSession != null) {
+        if (_authClient.currentSession!.isExpired) {
+          await _authClient
+              .refreshSession(_authClient.currentSession!.refreshToken);
+          return true;
+        }
+        return true;
+      }
+      return false;
+    } catch (e) {
+      FlutterLogs.logError(
+        runtimeType.toString(),
+        getFunctionName(),
+        'Failed to log in into Supabase: ${e.toString()}',
+      );
+      rethrow;
+    }
+  }
 
   Future<void> signIn() async {
     try {
@@ -35,25 +59,15 @@ class AuthService {
         );
       }
 
-      _account = await _supaBaseAuthClient.signInWithIdToken(
+      _account = await _authClient.signInWithIdToken(
         provider: OAuthProvider.google,
         idToken: idToken,
         accessToken: accessToken,
       );
 
-      _supaBaseAuthClient.onAuthStateChange.listen((event) {
-        FlutterLogs.logInfo(
-          runtimeType.toString(),
-          getFunctionName(),
-          event.toString(),
-        );
-      }, onError: (Object error) {
-        FlutterLogs.logError(
-          runtimeType.toString(),
-          getFunctionName(),
-          error.toString(),
-        );
-      });
+      if (_account?.session == null && _account?.user == null) {
+        throw AuthError('Failed to sign in');
+      }
     } catch (e) {
       FlutterLogs.logError(
         runtimeType.toString(),
@@ -66,7 +80,7 @@ class AuthService {
 
   Future<void> signOut() async {
     try {
-      await _supaBaseAuthClient.signOut();
+      await _authClient.signOut();
     } catch (e) {
       FlutterLogs.logError(
         runtimeType.toString(),

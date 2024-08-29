@@ -5,26 +5,42 @@ import 'package:defood/models/errors/auth_error.dart';
 import 'package:defood/services/auth_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginViewModel extends StreamViewModel<AuthState> {
+class LoginViewModel extends BaseViewModel {
   final _auth = locator<AuthService>();
   final _snackbar = locator<SnackbarService>();
   final _nav = locator<NavigationService>();
 
-  Future<void> tryToLogIn() async {
-    await signIn();
-    _nav.clearStackAndShow(Routes.navigationView);
+  Future<void> logIn() async {
+    try {
+      setBusy(true);
+      rebuildUi();
+      final result = await runBusyFuture(_auth.logIn());
+      if (!result) {
+        rebuildUi();
+        return;
+      }
+      await Future.delayed(const Duration(seconds: 3));
+      setBusy(false);
+      rebuildUi();
+      _nav.clearStackAndShow(Routes.boxesView);
+    } catch (e) {
+      _snackbar.showCustomSnackBar(
+        message: e is AuthError ? e.message : e.toString(),
+        variant: SnackbarType.info,
+      );
+    }
   }
 
   Future<void> signIn() async {
     try {
-      await _auth.signIn();
+      await runBusyFuture(_auth.signIn());
       _snackbar.showCustomSnackBar(
         message:
             'Logged in as ${_auth.account?.session?.user.email ?? '<error>'}',
         variant: SnackbarType.info,
       );
+      _nav.clearStackAndShow(Routes.boxesView);
     } catch (e) {
       _snackbar.showCustomSnackBar(
         message: e is AuthError ? e.message : e.toString(),
@@ -35,7 +51,7 @@ class LoginViewModel extends StreamViewModel<AuthState> {
 
   Future<void> signOut() async {
     try {
-      await _auth.signOut();
+      await runBusyFuture(_auth.signOut());
       _snackbar.showCustomSnackBar(
         message: 'Logged out from Supabase',
         variant: SnackbarType.info,
@@ -45,16 +61,6 @@ class LoginViewModel extends StreamViewModel<AuthState> {
         message: e is AuthError ? e.message : e.toString(),
         variant: SnackbarType.info,
       );
-    }
-  }
-
-  @override
-  Stream<AuthState> get stream => _auth.authClient.onAuthStateChange;
-
-  @override
-  void onData(AuthState? data) {
-    if (data != null) {
-      data.event == AuthChangeEvent.signedIn;
     }
   }
 }
