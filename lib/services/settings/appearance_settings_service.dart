@@ -18,9 +18,9 @@ enum AppearanceSettingsKey {
 
 const defaultDirPath = '/storage/emulated/0/Download/DeFood';
 
-final class AppearanceSettingsService
+final class AppearanceSettingsService extends SettingsFragment
     with ListenableServiceMixin
-    implements InitializableDependency, SettingsFragment {
+    implements InitializableDependency {
   @override
   Future<void> init() async {
     final customColor =

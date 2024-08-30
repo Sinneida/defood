@@ -10,9 +10,9 @@ enum AboutSettingsKey {
   devOptions,
 }
 
-final class AboutSettingsService
+final class AboutSettingsService extends SettingsFragment
     with ListenableServiceMixin
-    implements SettingsFragment, InitializableDependency {
+    implements InitializableDependency {
   AboutSettingsService() {
     listenToReactiveValues([
       _shownPermissions,
