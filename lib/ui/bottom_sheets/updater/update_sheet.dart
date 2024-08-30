@@ -56,7 +56,6 @@ Future<T?> showUpdaterSheet<T>() {
                   verticalSpaceSmall,
                   Card(
                     clipBehavior: Clip.antiAlias,
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
