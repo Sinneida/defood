@@ -144,6 +144,6 @@ class LoginView extends StackedView<LoginViewModel> {
 
   @override
   void onViewModelReady(LoginViewModel viewModel) {
-    // viewModel.signIn();
+    viewModel.signIn();
   }
 }
