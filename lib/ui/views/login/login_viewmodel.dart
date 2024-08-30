@@ -20,8 +20,7 @@ class LoginViewModel extends BaseViewModel {
       rebuildUi();
       await _auth.signIn();
       _snackbar.showCustomSnackBar(
-        message:
-            'Logged in as ${_auth.account?.session?.user.email ?? '<error>'}',
+        message: 'Logged in as ${_auth.account?.session?.user.email ?? '<error>'}',
         variant: SnackbarType.info,
       );
       await _nav.clearStackAndShow(Routes.boxesView);
