@@ -11,7 +11,7 @@ class BoxesViewModel extends BaseViewModel {
   final _authSettings = locator<AuthSettingsService>();
   final _snackbar = locator<SnackbarService>();
 
-  bool get hasSignedIn => _authSettings.hasSignedIn;
+  bool get hasSignedIn => _authSettings.hasSignedIn && _auth.account == null;
 
   bool _logginIn = false;
   bool get logginIn => _logginIn;
