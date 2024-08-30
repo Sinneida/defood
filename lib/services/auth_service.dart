@@ -6,9 +6,14 @@ import 'package:defood/utils/function_name.dart';
 import 'package:defood/utils/logger_helper.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:stacked/stacked.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthService with LoggerHelper  {
+class AuthService with LoggerHelper, ListenableServiceMixin {
+  AuthService() {
+    listenToReactiveValues([_account]);
+  }
+
   final _authSettings = locator<AuthSettingsService>();
 
   final _googleClient = GoogleSignIn(
@@ -51,11 +56,9 @@ class AuthService with LoggerHelper  {
       }
 
       await _authSettings.setPref<bool>(AuthSettingsKeys.hasSignedIn, true);
+      notifyListeners();
     } catch (e) {
-      logError(
-        'Failed to sign in into Supabase: ${e.toString()}',
-        e
-      );
+      logError('Failed to sign in into Supabase: ${e.toString()}', e);
       rethrow;
     }
   }

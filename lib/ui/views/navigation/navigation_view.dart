@@ -76,11 +76,4 @@ class NavigationView extends StackedView<NavigationViewModel> {
     BuildContext context,
   ) =>
       NavigationViewModel();
-
-  @override
-  void onViewModelReady(NavigationViewModel viewModel) {
-    if (viewModel.hasSignedIn) {
-      viewModel.signIn();
-    }
-  }
 }
