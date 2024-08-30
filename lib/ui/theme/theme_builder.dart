@@ -46,10 +46,7 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
                 ? 'CustomFont'
                 : GoogleFonts.gabarito().fontFamily,
           ),
-          // initialRoute: viewModel.shownPermissions
-          //     ? Routes.appsView
-          //     : Routes.permissionsView,
-          initialRoute: Routes.loginView,
+          initialRoute: viewModel.hasSignedIn ? Routes.navigationView : Routes.loginView,
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,
           navigatorObservers: [
