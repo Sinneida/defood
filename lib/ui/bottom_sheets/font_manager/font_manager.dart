@@ -47,7 +47,7 @@ Future<T?> showFontManagerSheet<T>() {
                         surfaceTintColor: Theme.of(context).colorScheme.primary,
                         child: ListTile(
                           onTap: () => viewModel.pickFont('Default'),
-                          title: const Text('Default (Inter Tight)'),
+                          title: const Text('Default (Gabarito)'),
                           leading: viewModel.pickedFont == 'Default'
                               ? const Icon(Icons.check)
                               : null,
