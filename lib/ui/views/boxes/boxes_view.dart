@@ -59,8 +59,12 @@ class BoxesView extends StackedView<BoxesViewModel> {
   }
 
   @override
-  BoxesViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      BoxesViewModel();
+  BoxesViewModel viewModelBuilder(BuildContext context) => BoxesViewModel();
+
+  @override
+  void onViewModelReady(BoxesViewModel viewModel) {
+    if (viewModel.hasSignedIn) {
+      viewModel.signIn();
+    }
+  }
 }
