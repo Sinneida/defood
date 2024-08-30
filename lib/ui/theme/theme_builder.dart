@@ -1,4 +1,5 @@
 import 'package:defood/app/app.router.dart';
+import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/gen/strings.g.dart';
 import 'package:defood/ui/theme/theme_builder_model.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -11,6 +12,20 @@ import 'package:defood/utils/dynamic_color_fix.dart';
 
 class ThemeBuilder extends StackedView<ThemeBuilderModel> {
   const ThemeBuilder({super.key});
+
+  void setupSnackbar(BuildContext context, ColorScheme light, ColorScheme dark) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    final Color snackColor;
+    final Color textColor;
+    if (!isLightTheme) {
+      snackColor = light.primary;
+      textColor = light.onPrimary;
+    } else {
+      snackColor = dark.primary;
+      textColor = dark.onPrimary;
+    }
+    setupSnackbarUi(snackColor, textColor);
+  }
 
   @override
   Widget builder(BuildContext context, viewModel, Widget? child) {
@@ -28,6 +43,8 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
           lightScheme = viewModel.getTheme(viewModel.customTheme).lightScheme;
           darkScheme = viewModel.getTheme(viewModel.customTheme).darkScheme;
         }
+
+        setupSnackbar(context, lightScheme, darkScheme);
 
         return MaterialApp(
           title: 'GlassDown',
