@@ -19,29 +19,6 @@ class AuthService with LoggerHelper {
   AuthResponse? _account;
   AuthResponse? get account => _account;
 
-  Future<bool> logIn() async {
-    // TODO: Fix busy state => loading indicator
-    try {
-      if (_authClient.currentUser != null &&
-          _authClient.currentSession != null) {
-        if (_authClient.currentSession!.isExpired) {
-          await _authClient
-              .refreshSession(_authClient.currentSession!.refreshToken);
-          return true;
-        }
-        return true;
-      }
-      return false;
-    } catch (e) {
-      FlutterLogs.logError(
-        runtimeType.toString(),
-        getFunctionName(),
-        'Failed to log in into Supabase: ${e.toString()}',
-      );
-      rethrow;
-    }
-  }
-
   Future<void> signIn() async {
     try {
       final googleUser = await _googleClient.signIn();
