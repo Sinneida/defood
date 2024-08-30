@@ -67,8 +67,7 @@ Future<T?> showFontManagerSheet<T>() {
                       for (final font in viewModel.fontsList)
                         Card(
                           clipBehavior: Clip.antiAlias,
-                          surfaceTintColor:
-                              Theme.of(context).colorScheme.primary,
+                          surfaceTintColor: Theme.of(context).colorScheme.primary,
                           child: ListTile(
                             onTap: () => viewModel.pickFont(font),
                             title: Text(font),

@@ -39,8 +39,7 @@ class CustomTheme extends StackedView<CustomThemeModel> {
                 Size(100, 0),
               ),
             ),
-            onPressed:
-                !viewModel.monetEnabled ? () => viewModel.handleTap() : null,
+            onPressed: !viewModel.monetEnabled ? () => viewModel.handleTap() : null,
             child: Text(
               viewModel.customColor.name.toCapitalized(),
             ),

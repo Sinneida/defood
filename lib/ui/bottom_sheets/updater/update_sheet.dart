@@ -56,32 +56,25 @@ Future<T?> showUpdaterSheet<T>() {
                   verticalSpaceSmall,
                   Card(
                     clipBehavior: Clip.antiAlias,
-                    color:
-                        Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         RadioListTile<PickedVersion>(
-                          tileColor: Theme.of(context)
-                              .colorScheme
-                              .surfaceTint
-                              .withAlpha(20),
+                          tileColor:
+                              Theme.of(context).colorScheme.surfaceTint.withAlpha(20),
                           value: PickedVersion.arm64,
                           groupValue: viewModel.pickedVersion,
                           onChanged: (value) => viewModel.updateVersion(value),
-                          title: Text(
-                              viewModel.updateInfo?.arm64.name ?? 'Loading...'),
+                          title: Text(viewModel.updateInfo?.arm64.name ?? 'Loading...'),
                         ),
                         RadioListTile<PickedVersion>(
-                          tileColor: Theme.of(context)
-                              .colorScheme
-                              .surfaceTint
-                              .withAlpha(20),
+                          tileColor:
+                              Theme.of(context).colorScheme.surfaceTint.withAlpha(20),
                           value: PickedVersion.arm32,
                           groupValue: viewModel.pickedVersion,
                           onChanged: (value) => viewModel.updateVersion(value),
-                          title: Text(
-                              viewModel.updateInfo?.arm32.name ?? 'Loading...'),
+                          title: Text(viewModel.updateInfo?.arm32.name ?? 'Loading...'),
                         ),
                       ],
                     ),
@@ -94,16 +87,12 @@ Future<T?> showUpdaterSheet<T>() {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            tileColor: Theme.of(context)
-                                .colorScheme
-                                .surfaceTint
-                                .withAlpha(20),
+                            tileColor:
+                                Theme.of(context).colorScheme.surfaceTint.withAlpha(20),
                             title: LinearProgressIndicator(
                               value: viewModel.progress.toInt() / 100,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceTint
-                                  .withAlpha(20),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surfaceTint.withAlpha(20),
                             ),
                             trailing: Text(
                               '${viewModel.progress.toStringAsFixed((0))}%',
@@ -126,9 +115,8 @@ Future<T?> showUpdaterSheet<T>() {
                       ),
                       horizontalSpaceMedium,
                       FilledButton(
-                        onPressed: viewModel.started
-                            ? null
-                            : () => viewModel.downloadUpdate(),
+                        onPressed:
+                            viewModel.started ? null : () => viewModel.downloadUpdate(),
                         child: const Text('Update'),
                       )
                     ],

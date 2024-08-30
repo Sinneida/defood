@@ -11,12 +11,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterLogs.initLogs(
-    logLevelsEnabled: [
-      LogLevel.ERROR,
-      LogLevel.WARNING,
-      LogLevel.SEVERE,
-      LogLevel.INFO
-    ],
+    logLevelsEnabled: [LogLevel.ERROR, LogLevel.WARNING, LogLevel.SEVERE, LogLevel.INFO],
     directoryStructure: DirectoryStructure.SINGLE_FILE_FOR_DAY,
     timeStampFormat: TimeStampFormat.TIME_FORMAT_READABLE_2,
     logFileExtension: LogFileExtension.TXT,

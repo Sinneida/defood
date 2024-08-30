@@ -66,13 +66,11 @@ double getResponsiveExtraLargeFontSize(BuildContext context) =>
 double getResponsiveMassiveFontSize(BuildContext context) =>
     getResponsiveFontSize(context, fontSize: 30);
 
-double getResponsiveFontSize(BuildContext context,
-    {double? fontSize, double? max}) {
+double getResponsiveFontSize(BuildContext context, {double? fontSize, double? max}) {
   max ??= 100;
 
-  var responsiveSize = min(
-      screenWidthFraction(context, dividedBy: 10) * ((fontSize ?? 100) / 100),
-      max);
+  var responsiveSize =
+      min(screenWidthFraction(context, dividedBy: 10) * ((fontSize ?? 100) / 100), max);
 
   return responsiveSize;
 }

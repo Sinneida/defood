@@ -39,8 +39,7 @@ class AboutAppDialog extends StackedView<AboutAppDialogModel> {
   }
 
   @override
-  AboutAppDialogModel viewModelBuilder(BuildContext context) =>
-      AboutAppDialogModel();
+  AboutAppDialogModel viewModelBuilder(BuildContext context) => AboutAppDialogModel();
 
   @override
   void onViewModelReady(AboutAppDialogModel viewModel) {

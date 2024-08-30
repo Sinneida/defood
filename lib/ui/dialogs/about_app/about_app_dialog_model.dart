@@ -5,8 +5,7 @@ import 'package:stacked/stacked.dart';
 
 class AboutAppDialogModel extends BaseViewModel {
   final _settings = locator<SettingsService>();
-  final message =
-      'This app helps you to download APK files, without tedious clicking.';
+  final message = 'This app helps you to download APK files, without tedious clicking.';
 
   AppPackageInfo? _info;
   AppPackageInfo? get info => _info;

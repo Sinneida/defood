@@ -20,17 +20,13 @@ class FontManagerModel extends ReactiveViewModel {
   Future<void> pickFont(String fontName) async {
     try {
       if (fontName == 'Default') {
-        _appearanceFragment.setPref<bool>(
-            AppearanceSettingsKey.useImportedFont, false);
-        _appearanceFragment.setPref<String>(
-            AppearanceSettingsKey.customFont, fontName);
+        _appearanceFragment.setPref<bool>(AppearanceSettingsKey.useImportedFont, false);
+        _appearanceFragment.setPref<String>(AppearanceSettingsKey.customFont, fontName);
         return;
       }
-      _appearanceFragment.setPref<bool>(
-          AppearanceSettingsKey.useImportedFont, true);
+      _appearanceFragment.setPref<bool>(AppearanceSettingsKey.useImportedFont, true);
       await _fontImporter.loadFonts(pickedFont);
-      _appearanceFragment.setPref<String>(
-          AppearanceSettingsKey.customFont, fontName);
+      _appearanceFragment.setPref<String>(AppearanceSettingsKey.customFont, fontName);
       rebuildUi();
     } catch (e) {
       _snackbar.showCustomSnackBar(

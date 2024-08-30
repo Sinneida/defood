@@ -176,8 +176,7 @@ class FontImporterService {
       _fontLoader = FontLoader('CustomFont');
 
       for (int i = 0; i < importedFonts.len; i++) {
-        _fontLoader!
-            .addFont(_prepareFont(importedFonts.fontFiles.elementAt(i)));
+        _fontLoader!.addFont(_prepareFont(importedFonts.fontFiles.elementAt(i)));
       }
       await _fontLoader!.load();
     } catch (e) {

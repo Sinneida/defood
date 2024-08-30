@@ -5,6 +5,7 @@ import 'package:defood/services/logs_service.dart';
 import 'package:defood/services/paths_service.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
+import 'package:defood/services/settings/auth_settings_service.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/services/updater_service.dart';
 import 'package:defood/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -37,6 +38,7 @@ import 'package:defood/ui/views/login/login_view.dart';
     InitializableSingleton(classType: SettingsService),
     InitializableSingleton(classType: AppearanceSettingsService),
     InitializableSingleton(classType: AboutSettingsService),
+    InitializableSingleton(classType: AuthSettingsService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: PathsService),
     LazySingleton(classType: LogsService),

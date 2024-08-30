@@ -22,12 +22,10 @@ final class AboutSettingsService extends SettingsFragment
 
   @override
   Future<void> init() async {
-    _shownPermissions =
-        _settings.prefs.getBool(AboutSettingsKey.shownPermissions.name) ??
-            _shownPermissions;
+    _shownPermissions = _settings.prefs.getBool(AboutSettingsKey.shownPermissions.name) ??
+        _shownPermissions;
     _disableUpdates =
-        _settings.prefs.getBool(AboutSettingsKey.disableUpdates.name) ??
-            _disableUpdates;
+        _settings.prefs.getBool(AboutSettingsKey.disableUpdates.name) ?? _disableUpdates;
   }
 
   final _settings = locator<SettingsService>();
@@ -42,8 +40,7 @@ final class AboutSettingsService extends SettingsFragment
   bool get disableUpdates => _disableUpdates;
 
   @override
-  Future<void> setPref<T extends Object>(Enum key, T value,
-      [bool save = true]) async {
+  Future<void> setPref<T extends Object>(Enum key, T value, [bool save = true]) async {
     switch (key) {
       case AboutSettingsKey.shownPermissions:
         _shownPermissions = value as bool;

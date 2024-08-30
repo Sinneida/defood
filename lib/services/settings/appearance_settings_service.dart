@@ -23,11 +23,9 @@ final class AppearanceSettingsService extends SettingsFragment
     implements InitializableDependency {
   @override
   Future<void> init() async {
-    final customColor =
-        _settings.prefs.getString(AppearanceSettingsKey.customTheme.name);
-    _customColor = customColor != null
-        ? MainColor.values.byName(customColor)
-        : MainColor.blue;
+    final customColor = _settings.prefs.getString(AppearanceSettingsKey.customTheme.name);
+    _customColor =
+        customColor != null ? MainColor.values.byName(customColor) : MainColor.blue;
 
     final supportMonet = await _settings.checkForAndroid12Plus();
 
@@ -36,8 +34,7 @@ final class AppearanceSettingsService extends SettingsFragment
       _supportMonet = false;
     } else {
       _monetEnabled =
-          _settings.prefs.getBool(AppearanceSettingsKey.monet.name) ??
-              _monetEnabled;
+          _settings.prefs.getBool(AppearanceSettingsKey.monet.name) ?? _monetEnabled;
     }
 
     _useImportedFont =
@@ -45,8 +42,7 @@ final class AppearanceSettingsService extends SettingsFragment
             _useImportedFont;
 
     _customFont =
-        _settings.prefs.getString(AppearanceSettingsKey.customFont.name) ??
-            _customFont;
+        _settings.prefs.getString(AppearanceSettingsKey.customFont.name) ?? _customFont;
   }
 
   final _settings = locator<SettingsService>();

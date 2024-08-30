@@ -23,8 +23,7 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
 
         if (monetPresent && viewModel.monetEnabled) {
           lightScheme = generateColorScheme(lightDynamic.primary);
-          darkScheme =
-              generateColorScheme(darkDynamic.primary, Brightness.dark);
+          darkScheme = generateColorScheme(darkDynamic.primary, Brightness.dark);
         } else {
           lightScheme = viewModel.getTheme(viewModel.customTheme).lightScheme;
           darkScheme = viewModel.getTheme(viewModel.customTheme).darkScheme;
