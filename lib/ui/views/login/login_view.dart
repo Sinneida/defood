@@ -51,6 +51,13 @@ class LoginView extends StackedView<LoginViewModel> {
                       ),
                     ),
                   ),
+                  // verticalSpaceTiny,
+                  const ListTile(
+                    title: Text(
+                      'Simplify your food management!',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   verticalSpaceMedium,
                   if (viewModel.logginIn)
                     Row(
@@ -137,6 +144,6 @@ class LoginView extends StackedView<LoginViewModel> {
 
   @override
   void onViewModelReady(LoginViewModel viewModel) {
-    viewModel.signIn();
+    // viewModel.signIn();
   }
 }
