@@ -23,7 +23,7 @@ class LoginViewModel extends BaseViewModel {
         message: 'Logged in as ${_auth.account?.session?.user.email ?? '<error>'}',
         variant: SnackbarType.info,
       );
-      await _nav.clearStackAndShow(Routes.boxesView);
+      await _nav.clearStackAndShow(Routes.navigationView);
     } catch (e) {
       _snackbar.showCustomSnackBar(
         message: e is AuthError ? e.message : e.toString(),
