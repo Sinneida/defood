@@ -39,8 +39,7 @@ class LoginView extends StackedView<LoginViewModel> {
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                         decorationStyle: TextDecorationStyle.dotted,
-                        fontSize:
-                            Theme.of(context).textTheme.displayMedium?.fontSize,
+                        fontSize: Theme.of(context).textTheme.displayMedium?.fontSize,
                         fontWeight: FontWeight.bold,
                         fontFamily: GoogleFonts.pattaya().fontFamily,
                       ),
@@ -132,10 +131,7 @@ class LoginView extends StackedView<LoginViewModel> {
   }
 
   @override
-  LoginViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      LoginViewModel();
+  LoginViewModel viewModelBuilder(BuildContext context) => LoginViewModel();
 
   @override
   void onViewModelReady(LoginViewModel viewModel) {
