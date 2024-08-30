@@ -1,4 +1,6 @@
+import 'package:defood/app/app.locator.dart';
 import 'package:defood/models/errors/auth_error.dart';
+import 'package:defood/services/settings/auth_settings_service.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:defood/utils/function_name.dart';
 import 'package:defood/utils/logger_helper.dart';
@@ -6,7 +8,9 @@ import 'package:flutter_logs/flutter_logs.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthService with LoggerHelper {
+class AuthService with LoggerHelper  {
+  final _authSettings = locator<AuthSettingsService>();
+
   final _googleClient = GoogleSignIn(
     signInOption: SignInOption.standard,
     clientId: Env.clientId,
@@ -45,11 +49,12 @@ class AuthService with LoggerHelper {
       if (_account?.session == null && _account?.user == null) {
         throw AuthError('Failed to sign in');
       }
+
+      await _authSettings.setPref<bool>(AuthSettingsKeys.hasSignedIn, true);
     } catch (e) {
-      FlutterLogs.logError(
-        runtimeType.toString(),
-        getFunctionName(),
+      logError(
         'Failed to sign in into Supabase: ${e.toString()}',
+        e
       );
       rethrow;
     }
