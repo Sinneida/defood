@@ -37,7 +37,7 @@ class NavigationView extends StackedView<NavigationViewModel> {
     final snackColor = Theme.of(context).colorScheme.primary;
     final textColor = Theme.of(context).colorScheme.onPrimary;
     setupSnackbarUi(snackColor, textColor);
-    
+
     return Scaffold(
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
@@ -81,4 +81,11 @@ class NavigationView extends StackedView<NavigationViewModel> {
     BuildContext context,
   ) =>
       NavigationViewModel();
+
+  @override
+  void onViewModelReady(NavigationViewModel viewModel) {
+    if (viewModel.hasSignedIn) {
+      viewModel.signIn();
+    }
+  }
 }
