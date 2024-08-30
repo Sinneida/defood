@@ -52,7 +52,7 @@ class LoginView extends StackedView<LoginViewModel> {
                     ),
                   ),
                   verticalSpaceMedium,
-                  if (viewModel.isBusy)
+                  if (viewModel.logginIn)
                     Row(
                       children: [
                         Expanded(
@@ -137,6 +137,6 @@ class LoginView extends StackedView<LoginViewModel> {
 
   @override
   void onViewModelReady(LoginViewModel viewModel) {
-    viewModel.logIn();
+    viewModel.signIn();
   }
 }

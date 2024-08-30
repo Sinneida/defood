@@ -11,30 +11,20 @@ class LoginViewModel extends BaseViewModel {
   final _snackbar = locator<SnackbarService>();
   final _nav = locator<NavigationService>();
 
-  Future<void> logIn() async {
-    try {
-      final result = await runBusyFuture(_auth.logIn());
-      if (!result) {
-        return;
-      }
-      _nav.clearStackAndShow(Routes.boxesView);
-    } catch (e) {
-      _snackbar.showCustomSnackBar(
-        message: e is AuthError ? e.message : e.toString(),
-        variant: SnackbarType.info,
-      );
-    }
-  }
+  bool _logginIn = false;
+  bool get logginIn => _logginIn;
 
   Future<void> signIn() async {
     try {
-      await runBusyFuture(_auth.signIn());
+      _logginIn = true;
+      rebuildUi();
+      await _auth.signIn();
       _snackbar.showCustomSnackBar(
         message:
             'Logged in as ${_auth.account?.session?.user.email ?? '<error>'}',
         variant: SnackbarType.info,
       );
-      _nav.clearStackAndShow(Routes.boxesView);
+      await _nav.clearStackAndShow(Routes.boxesView);
     } catch (e) {
       _snackbar.showCustomSnackBar(
         message: e is AuthError ? e.message : e.toString(),
