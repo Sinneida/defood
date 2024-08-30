@@ -1,4 +1,3 @@
-import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -55,38 +54,6 @@ class BoxesView extends StackedView<BoxesViewModel> {
         onPressed: () {},
         label: Text(t.boxes.add_box),
         icon: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).colorScheme.surfaceTint.withAlpha(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (viewModel.avatar == null)
-              TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.account_circle),
-                label: const Text('Account'),
-              )
-            else
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundImage: NetworkImage(viewModel.avatar!),
-                  ),
-                  horizontalSpaceSmall,
-                  const Text('Account')
-                ],
-              ),
-            TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.settings),
-              label: const Text('Settings'),
-            ),
-          ],
-        ),
       ),
     );
   }
