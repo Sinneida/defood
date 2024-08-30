@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
 import 'package:defood/ui/views/recipes/recipes_view.dart';
 import 'package:defood/ui/views/schedule/schedule_view.dart';
@@ -33,6 +34,10 @@ class NavigationView extends StackedView<NavigationViewModel> {
     NavigationViewModel viewModel,
     Widget? child,
   ) {
+    final snackColor = Theme.of(context).colorScheme.primary;
+    final textColor = Theme.of(context).colorScheme.onPrimary;
+    setupSnackbarUi(snackColor, textColor);
+    
     return Scaffold(
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
