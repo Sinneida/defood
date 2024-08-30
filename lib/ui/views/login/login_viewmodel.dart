@@ -13,16 +13,10 @@ class LoginViewModel extends BaseViewModel {
 
   Future<void> logIn() async {
     try {
-      setBusy(true);
-      rebuildUi();
       final result = await runBusyFuture(_auth.logIn());
       if (!result) {
-        rebuildUi();
         return;
       }
-      await Future.delayed(const Duration(seconds: 3));
-      setBusy(false);
-      rebuildUi();
       _nav.clearStackAndShow(Routes.boxesView);
     } catch (e) {
       _snackbar.showCustomSnackBar(

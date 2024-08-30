@@ -104,7 +104,7 @@ class LoginView extends StackedView<LoginViewModel> {
                                 child: ListTile(
                                   onTap: () => viewModel.signIn(),
                                   leading: const Icon(Icons.login),
-                                  title: const Text('Sign in'),
+                                  title: const Text('Log in'),
                                 ),
                               ),
                               verticalSpaceTiny,
@@ -114,7 +114,7 @@ class LoginView extends StackedView<LoginViewModel> {
                                 child: ListTile(
                                   onTap: () => viewModel.signOut(),
                                   leading: const Icon(Icons.logout),
-                                  title: const Text('Sign out'),
+                                  title: const Text('Log out'),
                                 ),
                               ),
                             ],
