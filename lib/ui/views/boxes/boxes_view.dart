@@ -51,7 +51,7 @@ class BoxesView extends StackedView<BoxesViewModel> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () => viewModel.showAddBox(),
         label: Text(t.boxes.add_box),
         icon: const Icon(Icons.add),
       ),

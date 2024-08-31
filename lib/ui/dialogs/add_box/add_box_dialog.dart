@@ -94,11 +94,9 @@ class AddBoxDialog extends StackedView<AddBoxDialogModel> with $AddBoxDialog {
         if (!viewModel.hasAnyValidationMessage)
           FilledButton(
             onPressed: () {
+              final value = viewModel.boxNameValue!.trim();
               viewModel.clearForm();
-              completer(DialogResponse<String>(
-                confirmed: true,
-                data: boxNameController.value.text,
-              ));
+              completer(DialogResponse<String>(confirmed: true, data: value));
             },
             child: const Text('Add'),
           )
@@ -113,4 +111,9 @@ class AddBoxDialog extends StackedView<AddBoxDialogModel> with $AddBoxDialog {
 
   @override
   AddBoxDialogModel viewModelBuilder(BuildContext context) => AddBoxDialogModel();
+
+  @override
+  void onViewModelReady(AddBoxDialogModel viewModel) {
+    syncFormWithViewModel(viewModel);
+  }
 }
