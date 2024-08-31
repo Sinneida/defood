@@ -18,6 +18,7 @@ import 'package:defood/ui/views/recipes/recipes_view.dart';
 import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
 import 'package:defood/ui/views/login/login_view.dart';
+import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -49,6 +50,7 @@ import 'package:defood/ui/views/login/login_view.dart';
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: AboutAppDialog),
+    StackedDialog(classType: AddBoxDialog),
 // @stacked-dialog
   ],
 )
