@@ -1,5 +1,6 @@
 import 'package:defood/services/auth_service.dart';
 import 'package:defood/services/custom_themes_service.dart';
+import 'package:defood/services/database_service.dart';
 import 'package:defood/services/font_importer_service.dart';
 import 'package:defood/services/logs_service.dart';
 import 'package:defood/services/paths_service.dart';
@@ -45,6 +46,7 @@ import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
     LazySingleton(classType: LogsService),
     LazySingleton(classType: UpdaterService),
     LazySingleton(classType: FontImporterService),
+    LazySingleton(classType: DatabaseService),
 // @stacked-service
   ],
   dialogs: [
