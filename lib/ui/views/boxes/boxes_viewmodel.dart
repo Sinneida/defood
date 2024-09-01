@@ -28,6 +28,7 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
     try {
       final result = await _db.loadAllBoxes();
       _boxes.addAll(result);
+      rebuildUi();
     } catch (e) {
       notifyError('Failed to load boxes');
     }
