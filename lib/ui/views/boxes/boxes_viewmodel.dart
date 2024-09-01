@@ -1,11 +1,11 @@
 import 'package:defood/app/app.dialogs.dart';
 import 'package:defood/app/app.locator.dart';
 import 'package:defood/services/auth_service.dart';
-import 'package:defood/utils/snackbar_helper.dart';
+import 'package:defood/utils/notification_helper.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class BoxesViewModel extends BaseViewModel with SnackbarHelper {
+class BoxesViewModel extends BaseViewModel with NotificationHelper {
   final _auth = locator<AuthService>();
   final _dialog = locator<DialogService>();
 
@@ -24,10 +24,10 @@ class BoxesViewModel extends BaseViewModel with SnackbarHelper {
       );
       rebuildUi();
       if (name != null && name.data != null) {
-        showInfoSnack('Added ${name.data}');
+        notifyInfo('Added ${name.data}');
       }
     } catch (e) {
-      showInfoSnack('Failed to add new box: ${e.toString()}');
+      notifyInfo('Failed to add new box: ${e.toString()}');
     }
   }
 }
