@@ -3,17 +3,24 @@ import 'package:defood/app/app.snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-mixin SnackbarHelper on ChangeNotifier {
+mixin NotificationHelper on ChangeNotifier {
   final _snackbar = locator<SnackbarService>();
 
-  void showInfoSnack(String message) {
+  void notifyInfo(String message) {
     _snackbar.showCustomSnackBar(
       message: message,
       variant: SnackbarType.info,
     );
   }
 
-  void showProgressSnack(String message) {
+  void notifyError(String message) {
+    _snackbar.showCustomSnackBar(
+      message: message,
+      variant: SnackbarType.error,
+    );
+  }
+
+  void notifyProgress(String message) {
     _snackbar.showCustomSnackBar(
       message: message,
       variant: SnackbarType.progress,
