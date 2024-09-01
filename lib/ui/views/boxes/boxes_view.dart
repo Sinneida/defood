@@ -42,12 +42,31 @@ class BoxesView extends StackedView<BoxesViewModel> {
                 )
             ],
           ),
-          PlaceholderText(
-            text: [
-              t.boxes.no_boxes_placeholder_1,
-              t.boxes.no_boxes_placeholder_2,
-            ],
-          )
+          if (viewModel.boxes.isEmpty)
+            PlaceholderText(
+              text: [
+                t.boxes.no_boxes_placeholder_1,
+                t.boxes.no_boxes_placeholder_2,
+              ],
+            )
+          else
+            SliverList.list(
+              children: [
+                ListView(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    for (final box in viewModel.boxes)
+                      Card(
+                        child: ListTile(
+                          title: Text(box.name),
+                        ),
+                      )
+                  ],
+                )
+              ],
+            )
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -60,4 +79,9 @@ class BoxesView extends StackedView<BoxesViewModel> {
 
   @override
   BoxesViewModel viewModelBuilder(BuildContext context) => BoxesViewModel();
+
+  @override
+  void onViewModelReady(BoxesViewModel viewModel) {
+    viewModel.loadAllBoxes();
+  }
 }
