@@ -3,8 +3,11 @@ import 'package:defood/ui/views/settings/items/app_theme/app_theme.dart';
 import 'package:defood/ui/views/settings/items/check_updates/check_updates.dart';
 import 'package:defood/ui/views/settings/items/custom_font_list/custom_font_list.dart';
 import 'package:defood/ui/views/settings/items/custom_theme/custom_theme.dart';
+import 'package:defood/ui/views/settings/items/delete_logs/delete_logs.dart';
+import 'package:defood/ui/views/settings/items/export_logs/export_logs.dart';
 import 'package:defood/ui/views/settings/items/import_font/import_font.dart';
 import 'package:defood/ui/views/settings/items/monet_theme/monet_theme.dart';
+import 'package:defood/ui/views/settings/items/show_logs/show_logs.dart';
 import 'package:defood/ui/views/settings/items/user_card/user_card.dart';
 import 'package:defood/ui/widgets/common/divider.dart';
 import 'package:defood/ui/widgets/settings/common/group_header.dart';
@@ -48,6 +51,11 @@ class SettingsView extends StackedView<SettingsViewModel> {
                   CustomTheme(),
                   ImportFont(),
                   CustomFontList(),
+                  ItemDivider(),
+                  GroupHeader(name: 'Logs'),
+                  ShowLogs(),
+                  ExportLogs(),
+                  DeleteLogs(),
                   ItemDivider(),
                   GroupHeader(name: 'About'),
                   CheckUpdates(),
