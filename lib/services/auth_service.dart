@@ -28,6 +28,10 @@ class AuthService with LoggerHelper, ListenableServiceMixin {
   AuthResponse? _account;
   AuthResponse? get account => _account;
 
+  String? get userName => _account?.user?.userMetadata?['name'];
+  String? get avatarUrl => _account?.user?.userMetadata?['avatar_url'];
+  String? get userEmail => _account?.user?.email;
+
   Future<void> signIn() async {
     try {
       final googleUser = await _googleClient.signIn();

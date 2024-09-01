@@ -10,11 +10,15 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper {
   final _dialog = locator<DialogService>();
 
   String? get avatar {
-    return _auth.account?.user?.userMetadata?['avatar_url'];
+    return _auth.avatarUrl;
   }
 
   String? get userEmail {
-    return _auth.account?.user?.email;
+    return _auth.userEmail;
+  }
+
+  Future<void> loadAllBoxes() async {
+
   }
 
   Future<void> showAddBox() async {

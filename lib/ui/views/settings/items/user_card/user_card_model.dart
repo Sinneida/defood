@@ -6,14 +6,14 @@ class UserCardModel extends BaseViewModel {
   final _auth = locator<AuthService>();
 
   String? get avatarUrl {
-    return _auth.account?.user?.userMetadata?['avatar_url'];
+    return _auth.avatarUrl;
   }
 
   String? get userName {
-    return _auth.account?.user?.userMetadata?['name'];
+    return _auth.userName;
   }
 
   String? get userEmail {
-    return _auth.account?.user?.email;
+    return _auth.userEmail;
   }
 }
