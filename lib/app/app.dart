@@ -10,6 +10,7 @@ import 'package:defood/services/settings/auth_settings_service.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/services/updater_service.dart';
 import 'package:defood/ui/dialogs/info_alert/info_alert_dialog.dart';
+import 'package:defood/ui/permissions/permissions_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
@@ -30,6 +31,7 @@ import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
     MaterialRoute(page: RecipesView),
     MaterialRoute(page: ScheduleView),
     MaterialRoute(page: LoginView),
+    MaterialRoute(page: PermissionsView),
 // @stacked-route
   ],
   dependencies: [
