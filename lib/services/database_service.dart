@@ -33,7 +33,10 @@ class DatabaseService with LoggerHelper {
   Future<List<Box>> loadAllBoxes() async {
     try {
       isAuthOk();
-      final result = await _db.from(Tables.boxes).select().eq(
+      final result = await _db
+          .from(Tables.boxes)
+          .select('id, name, created_at, updated_at, email, products(id, name)')
+          .eq(
             BoxesTable.email,
             _auth.userEmail!,
           );
