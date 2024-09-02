@@ -43,7 +43,11 @@ class BoxesView extends StackedView<BoxesViewModel> {
                 )
             ],
           ),
-          if (viewModel.boxes.isEmpty)
+          if (viewModel.isBusy)
+            const SliverToBoxAdapter(
+              child: LinearProgressIndicator(),
+            )
+          else if (viewModel.boxes.isEmpty)
             PlaceholderText(
               text: [
                 t.boxes.no_boxes_placeholder_1,

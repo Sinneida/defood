@@ -26,7 +26,7 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
 
   Future<void> loadAllBoxes() async {
     try {
-      final result = await _db.loadAllBoxes();
+      final result = await runBusyFuture(_db.loadAllBoxes());
       _boxes.addAll(result);
       rebuildUi();
     } catch (e) {
@@ -40,7 +40,7 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
         variant: DialogType.addBox,
       );
       if (name != null && name.data != null) {
-        await addNewBox(name.data!);
+        await runBusyFuture(addNewBox(name.data!));
         notifyInfo('Added ${name.data}');
       }
       rebuildUi();
@@ -52,7 +52,7 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
   }
 
   Future<void> addNewBox(String name) async {
-    final result = await _db.createBox(name);
+    final result = await runBusyFuture(_db.createBox(name));
     _boxes.addAll(result);
     rebuildUi();
   }
