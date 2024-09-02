@@ -5,7 +5,17 @@ import 'package:defood/services/auth_service.dart';
 import 'package:defood/utils/logger_helper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-enum Tables { boxes, products }
+abstract final class Tables {
+  static const boxes = 'boxes';
+  static const products = 'products';
+}
+
+abstract final class BoxesTable {
+  static const id = 'id';
+  static const name = 'name';
+  static const products = 'products';
+  static const email = 'email';
+}
 
 class DatabaseService with LoggerHelper {
   final _auth = locator<AuthService>();
@@ -23,8 +33,8 @@ class DatabaseService with LoggerHelper {
   Future<List<Box>> loadAllBoxes() async {
     try {
       isAuthOk();
-      final result = await _db.from(Tables.boxes.name).select().eq(
-            'email',
+      final result = await _db.from(Tables.boxes).select().eq(
+            BoxesTable.email,
             _auth.userEmail!,
           );
       return result.map((e) => Box.fromMap(e)).toList();
@@ -34,16 +44,29 @@ class DatabaseService with LoggerHelper {
     }
   }
 
-  Future<void> createBox(String name) async {
+  Future<List<Box>> createBox(String name) async {
     try {
       isAuthOk();
       final Map<String, dynamic> values = {
-        'name': name,
-        'email': _auth.userEmail,
+        BoxesTable.name: name,
+        BoxesTable.email: _auth.userEmail,
       };
-      await _db.from(Tables.boxes.name).insert(values);
+      final result = await _db.from(Tables.boxes).insert(values).select();
+      return result.map((e) => Box.fromMap(e)).toList();
     } catch (e) {
       logError('Failed to save new box', e);
+      rethrow;
+    }
+  }
+
+  Future<bool> deleteBox(int id) async {
+    try {
+      isAuthOk();
+      final result = await _db.from(Tables.boxes).delete().eq(BoxesTable.id, id).select();
+      return result.isNotEmpty;
+    } catch (e) {
+      logError('Failed to delete box', e);
+      rethrow;
     }
   }
 }
