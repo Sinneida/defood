@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
+import 'package:defood/ui/views/products/products_view.dart';
 import 'package:defood/ui/views/recipes/recipes_view.dart';
 import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/views/settings/settings_view.dart';
@@ -17,10 +18,12 @@ class NavigationView extends StackedView<NavigationViewModel> {
       case 0:
         return const BoxesView();
       case 1:
-        return const RecipesView();
+        return const ProductsView();
       case 2:
-        return const ScheduleView();
+        return const RecipesView();
       case 3:
+        return const ScheduleView();
+      case 4:
         return const SettingsView();
       default:
         return const BoxesView();
@@ -53,6 +56,10 @@ class NavigationView extends StackedView<NavigationViewModel> {
           NavigationDestination(
             icon: const Icon(Icons.inbox),
             label: t.boxes.name,
+          ),
+          const NavigationDestination(
+            icon: Icon(Icons.shopping_basket_outlined),
+            label: 'Products',
           ),
           NavigationDestination(
             icon: const Icon(Icons.receipt),
