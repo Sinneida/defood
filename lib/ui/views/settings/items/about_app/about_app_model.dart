@@ -3,7 +3,6 @@ import 'package:defood/app/app.locator.dart';
 import 'package:defood/app/app.snackbar.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
-import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/utils/envs.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,11 +10,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutAppModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
-  final _settings = locator<SettingsService>();
-  final _aboutFragment = locator<AboutSettingsService>();
+  final _aboutSettings = locator<AboutSettingsService>();
   final _snackbar = locator<SnackbarService>();
 
-  bool get devOptions => _aboutFragment.devOptions;
+  bool get devOptions => _aboutSettings.devOptions;
   bool get isRepoUrlDisabled => Env.repoUrl.isEmpty;
 
   final loadingMsg = 'Loading...';
@@ -31,7 +29,7 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   Future<void> setDevOptions(bool val) async {
-    _aboutFragment.setPref<bool>(AboutSettingsKey.devOptions, val);
+    _aboutSettings.setPref<bool>(AboutSettingsKey.devOptions, val);
     await _snackbar.showCustomSnackBar(
       message: getDevOptionsSnackMessage(),
       variant: SnackbarType.info,
@@ -47,7 +45,7 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   Future<void> getPackageInfo() async {
-    _info = await _settings.getPackageInfo();
+    _info = await _aboutSettings.settings.getPackageInfo();
     rebuildUi();
   }
 
@@ -67,5 +65,5 @@ class AboutAppModel extends ReactiveViewModel {
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_aboutFragment];
+  List<ListenableServiceMixin> get listenableServices => [_aboutSettings];
 }
