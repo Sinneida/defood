@@ -8,6 +8,7 @@ import 'package:defood/ui/views/settings/items/export_logs/export_logs.dart';
 import 'package:defood/ui/views/settings/items/import_font/import_font.dart';
 import 'package:defood/ui/views/settings/items/monet_theme/monet_theme.dart';
 import 'package:defood/ui/views/settings/items/show_logs/show_logs.dart';
+import 'package:defood/ui/views/settings/items/show_permissions/show_permissions.dart';
 import 'package:defood/ui/views/settings/items/user_card/user_card.dart';
 import 'package:defood/ui/widgets/common/divider.dart';
 import 'package:defood/ui/widgets/settings/common/group_header.dart';
@@ -58,6 +59,7 @@ class SettingsView extends StackedView<SettingsViewModel> {
                   DeleteLogs(),
                   ItemDivider(),
                   GroupHeader(name: 'About'),
+                  ShowPermissions(),
                   CheckUpdates(),
                   AboutApp(),
                 ],
