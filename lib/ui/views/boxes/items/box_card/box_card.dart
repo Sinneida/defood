@@ -41,7 +41,11 @@ class BoxCard extends StackedView<BoxCardModel> {
         clipBehavior: Clip.antiAlias,
         surfaceTintColor: Theme.of(context).colorScheme.primary,
         child: ListTile(
+          leading: const Icon(Icons.ac_unit),
           title: Text(box.name),
+          subtitle: Text(
+            box.products == null ? 'No products' : '${box.products!.length} products',
+          ),
         ),
       ),
     );
