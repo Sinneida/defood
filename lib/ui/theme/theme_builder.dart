@@ -16,7 +16,7 @@ class ThemeBuilder extends StackedView<ThemeBuilderModel> {
   void setupSnackbar(BuildContext context, ColorScheme light, ColorScheme dark) {
     final isLightTheme = Theme.of(context).brightness == Brightness.light;
     final Color snackColor = isLightTheme ? dark.primary : light.primary;
-    final Color textColor = isLightTheme ? dark.primary : light.primary;
+    final Color textColor = isLightTheme ? dark.onPrimary : light.onPrimary;
     setupSnackbarUi(snackColor, textColor);
   }
 
