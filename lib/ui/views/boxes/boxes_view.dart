@@ -1,3 +1,4 @@
+import 'package:defood/ui/views/boxes/items/box_card/box_card.dart';
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -58,10 +59,9 @@ class BoxesView extends StackedView<BoxesViewModel> {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     for (final box in viewModel.boxes)
-                      Card(
-                        child: ListTile(
-                          title: Text(box.name),
-                        ),
+                      BoxCard(
+                        box,
+                        viewModel.deleteBox,
                       )
                   ],
                 )

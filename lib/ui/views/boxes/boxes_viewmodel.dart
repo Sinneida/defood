@@ -52,6 +52,13 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
   }
 
   Future<void> addNewBox(String name) async {
-    await _db.createBox(name);
+    final result = await _db.createBox(name);
+    _boxes.addAll(result);
+    rebuildUi();
+  }
+
+  void deleteBox(int id) {
+    _boxes.removeWhere((el) => el.id == id);
+    rebuildUi();
   }
 }
