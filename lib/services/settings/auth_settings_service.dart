@@ -16,6 +16,7 @@ class AuthSettingsService extends SettingsFragment
   }
 
   final _settings = locator<SettingsService>();
+  SettingsService get settings => _settings;
 
   bool _hasSignedIn = false;
   bool get hasSignedIn => _hasSignedIn;

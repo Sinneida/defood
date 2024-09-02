@@ -29,6 +29,7 @@ final class AboutSettingsService extends SettingsFragment
   }
 
   final _settings = locator<SettingsService>();
+  SettingsService get settings => _settings;
 
   bool _devOptions = false;
   bool get devOptions => _devOptions;

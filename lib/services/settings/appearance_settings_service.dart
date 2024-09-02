@@ -46,6 +46,7 @@ final class AppearanceSettingsService extends SettingsFragment
   }
 
   final _settings = locator<SettingsService>();
+  SettingsService get settings => _settings;
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
