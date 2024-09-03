@@ -9,7 +9,6 @@ import 'package:defood/services/settings/appearance_settings_service.dart';
 import 'package:defood/services/settings/auth_settings_service.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/services/updater_service.dart';
-import 'package:defood/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:defood/ui/permissions/permissions_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -54,7 +53,6 @@ import 'package:defood/ui/views/products/products_view.dart';
 // @stacked-service
   ],
   dialogs: [
-    StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: AboutAppDialog),
     StackedDialog(classType: AddBoxDialog),
 // @stacked-dialog
