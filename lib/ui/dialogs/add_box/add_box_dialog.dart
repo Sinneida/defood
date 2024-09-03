@@ -41,11 +41,12 @@ class AddBoxDialog extends StackedView<AddBoxDialogModel> with $AddBoxDialog {
         children: [
           RichText(
             text: TextSpan(
-                text: viewModel.message,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontFamily: GoogleFonts.gabarito().fontFamily,
-                )),
+              text: viewModel.message,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                fontFamily: GoogleFonts.gabarito().fontFamily,
+              ),
+            ),
           ),
           verticalSpaceMedium,
           TextFormField(
