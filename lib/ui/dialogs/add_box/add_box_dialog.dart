@@ -2,6 +2,7 @@ import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/dialogs/add_box/add_box_dialog.form.dart';
 import 'package:defood/ui/widgets/form/validation_error_message.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -40,25 +41,11 @@ class AddBoxDialog extends StackedView<AddBoxDialogModel> with $AddBoxDialog {
         children: [
           RichText(
             text: TextSpan(
-              text: viewModel.message,
-              // children: [
-              //   TextSpan(
-              //     text: viewModel.urlMessage,
-              //     style: TextStyle(
-              //       fontStyle: FontStyle.italic,
-              //       fontWeight: FontWeight.w400,
-              //       color: Theme.of(context).colorScheme.onSurface,
-              //     ),
-              //   ),
-              //   TextSpan(
-              //     text: viewModel.appMessage,
-              //     style: TextStyle(
-              //       fontWeight: FontWeight.w600,
-              //       color: Theme.of(context).colorScheme.onSurface,
-              //     ),
-              //   ),
-              // ],
-            ),
+                text: viewModel.message,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontFamily: GoogleFonts.gabarito().fontFamily,
+                )),
           ),
           verticalSpaceMedium,
           TextFormField(
