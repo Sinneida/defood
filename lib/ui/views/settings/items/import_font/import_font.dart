@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:defood/ui/widgets/settings/common/item_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -22,13 +24,20 @@ class ImportFont extends StackedView<ImportFontModel> {
             showDialog(
               context: context,
               builder: (context) {
-                return AlertDialog(
-                  title: const Text('How to import?'),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(viewModel.fontImportMessage),
-                    ],
+                return BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 6,
+                    sigmaY: 6,
+                  ),
+                  child: AlertDialog(
+                    backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                    title: const Text('How to import?'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(viewModel.fontImportMessage),
+                      ],
+                    ),
                   ),
                 );
               },
