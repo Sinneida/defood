@@ -1,3 +1,4 @@
+import 'package:defood/ui/views/products/widgets/product_card.dart';
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -15,9 +16,9 @@ class ProductsView extends StackedView<ProductsViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: true,
             expandedHeight: 90,
             automaticallyImplyLeading: false,
@@ -26,9 +27,30 @@ class ProductsView extends StackedView<ProductsViewModel> {
               title: Text('Products'),
             ),
           ),
-          PlaceholderText(
-            text: ['No products 😔', 'You can add new one below!'],
-          )
+          if (viewModel.isBusy)
+            const SliverToBoxAdapter(
+              child: LinearProgressIndicator(),
+            )
+          else if (viewModel.products.isEmpty)
+            const PlaceholderText(
+              text: ['No products 😔', 'You can add new one below!'],
+            )
+          else
+            SliverList.list(
+              children: [
+                ListView(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    for (final product in viewModel.products)
+                      ProductCard(
+                        product,
+                      )
+                  ],
+                )
+              ],
+            )
         ],
       ),
       floatingActionButtonLocation: ExpandableFab.location,
@@ -73,4 +95,9 @@ class ProductsView extends StackedView<ProductsViewModel> {
     BuildContext context,
   ) =>
       ProductsViewModel();
+
+  @override
+  void onViewModelReady(ProductsViewModel viewModel) {
+    viewModel.loadAllProducts();
+  }
 }
