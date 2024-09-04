@@ -7,6 +7,11 @@ class ShowPermissionsModel extends BaseViewModel {
   final _navigation = locator<NavigationService>();
 
   void showPermissionsPage() {
-    _navigation.navigateWithTransition(const PermissionsView());
+    _navigation.navigateWithTransition(
+      const PermissionsView(
+        fromSettings: true,
+      ),
+      transitionStyle: Transition.rightToLeftWithFade,
+    );
   }
 }

@@ -5,7 +5,12 @@ import 'package:stacked/stacked.dart';
 import 'permissions_viewmodel.dart';
 
 class PermissionsView extends StackedView<PermissionsViewModel> {
-  const PermissionsView({super.key});
+  const PermissionsView({
+    super.key,
+    this.fromSettings = false,
+  });
+
+  final bool fromSettings;
 
   @override
   Widget builder(
@@ -105,16 +110,17 @@ class PermissionsView extends StackedView<PermissionsViewModel> {
                               ),
                             ),
                             verticalSpaceSmall,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: FilledButton(
-                                    onPressed: () => viewModel.goHome(),
-                                    child: const Text('Finish'),
+                            if (!fromSettings)
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: FilledButton(
+                                      onPressed: () => viewModel.goHome(),
+                                      child: const Text('Finish'),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
+                                ],
+                              )
                             // if (viewModel.storage)
                           ],
                         ),
