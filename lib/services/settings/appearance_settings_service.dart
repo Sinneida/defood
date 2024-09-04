@@ -18,16 +18,14 @@ enum AppearanceSettingsKey {
 
 const defaultDirPath = '/storage/emulated/0/Download/DeFood';
 
-final class AppearanceSettingsService
+final class AppearanceSettingsService extends SettingsFragment
     with ListenableServiceMixin
-    implements InitializableDependency, SettingsFragment {
+    implements InitializableDependency {
   @override
   Future<void> init() async {
-    final customColor =
-        _settings.prefs.getString(AppearanceSettingsKey.customTheme.name);
-    _customColor = customColor != null
-        ? MainColor.values.byName(customColor)
-        : MainColor.blue;
+    final customColor = _settings.prefs.getString(AppearanceSettingsKey.customTheme.name);
+    _customColor =
+        customColor != null ? MainColor.values.byName(customColor) : MainColor.blue;
 
     final supportMonet = await _settings.checkForAndroid12Plus();
 
@@ -36,8 +34,7 @@ final class AppearanceSettingsService
       _supportMonet = false;
     } else {
       _monetEnabled =
-          _settings.prefs.getBool(AppearanceSettingsKey.monet.name) ??
-              _monetEnabled;
+          _settings.prefs.getBool(AppearanceSettingsKey.monet.name) ?? _monetEnabled;
     }
 
     _useImportedFont =
@@ -45,11 +42,11 @@ final class AppearanceSettingsService
             _useImportedFont;
 
     _customFont =
-        _settings.prefs.getString(AppearanceSettingsKey.customFont.name) ??
-            _customFont;
+        _settings.prefs.getString(AppearanceSettingsKey.customFont.name) ?? _customFont;
   }
 
   final _settings = locator<SettingsService>();
+  SettingsService get settings => _settings;
 
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;

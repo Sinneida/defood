@@ -3,8 +3,13 @@ import 'package:defood/ui/views/settings/items/app_theme/app_theme.dart';
 import 'package:defood/ui/views/settings/items/check_updates/check_updates.dart';
 import 'package:defood/ui/views/settings/items/custom_font_list/custom_font_list.dart';
 import 'package:defood/ui/views/settings/items/custom_theme/custom_theme.dart';
+import 'package:defood/ui/views/settings/items/delete_logs/delete_logs.dart';
+import 'package:defood/ui/views/settings/items/export_logs/export_logs.dart';
 import 'package:defood/ui/views/settings/items/import_font/import_font.dart';
 import 'package:defood/ui/views/settings/items/monet_theme/monet_theme.dart';
+import 'package:defood/ui/views/settings/items/show_logs/show_logs.dart';
+import 'package:defood/ui/views/settings/items/show_permissions/show_permissions.dart';
+import 'package:defood/ui/views/settings/items/user_card/user_card.dart';
 import 'package:defood/ui/widgets/common/divider.dart';
 import 'package:defood/ui/widgets/settings/common/group_header.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +18,7 @@ import 'package:stacked/stacked.dart';
 import 'settings_viewmodel.dart';
 
 class SettingsView extends StackedView<SettingsViewModel> {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({super.key});
 
   @override
   Widget builder(
@@ -40,6 +45,7 @@ class SettingsView extends StackedView<SettingsViewModel> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
+                  UserCard(),
                   GroupHeader(name: 'Appearance'),
                   AppTheme(),
                   MonetTheme(),
@@ -47,7 +53,13 @@ class SettingsView extends StackedView<SettingsViewModel> {
                   ImportFont(),
                   CustomFontList(),
                   ItemDivider(),
+                  GroupHeader(name: 'Logs'),
+                  ShowLogs(),
+                  ExportLogs(),
+                  DeleteLogs(),
+                  ItemDivider(),
                   GroupHeader(name: 'About'),
+                  ShowPermissions(),
                   CheckUpdates(),
                   AboutApp(),
                 ],

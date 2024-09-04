@@ -61,9 +61,8 @@ class UpdateSheetModel extends ReactiveViewModel {
 
   Future<void> downloadUpdate() async {
     try {
-      final version = pickedVersion == PickedVersion.arm64
-          ? updateInfo!.arm64
-          : updateInfo!.arm32;
+      final version =
+          pickedVersion == PickedVersion.arm64 ? updateInfo!.arm64 : updateInfo!.arm32;
       _started = true;
       notifyListeners();
       final result = await _updater.downloadUpdate(version, token);

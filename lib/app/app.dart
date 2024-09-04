@@ -1,12 +1,15 @@
+import 'package:defood/services/auth_service.dart';
 import 'package:defood/services/custom_themes_service.dart';
+import 'package:defood/services/database_service.dart';
 import 'package:defood/services/font_importer_service.dart';
 import 'package:defood/services/logs_service.dart';
 import 'package:defood/services/paths_service.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
+import 'package:defood/services/settings/auth_settings_service.dart';
 import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:defood/services/updater_service.dart';
-import 'package:defood/ui/dialogs/info_alert/info_alert_dialog.dart';
+import 'package:defood/ui/permissions/permissions_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
@@ -15,6 +18,9 @@ import 'package:defood/ui/views/navigation/navigation_view.dart';
 import 'package:defood/ui/views/recipes/recipes_view.dart';
 import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
+import 'package:defood/ui/views/login/login_view.dart';
+import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
+import 'package:defood/ui/views/products/products_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,6 +30,9 @@ import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
     MaterialRoute(page: NavigationView),
     MaterialRoute(page: RecipesView),
     MaterialRoute(page: ScheduleView),
+    MaterialRoute(page: LoginView),
+    MaterialRoute(page: PermissionsView),
+    MaterialRoute(page: ProductsView),
 // @stacked-route
   ],
   dependencies: [
@@ -34,15 +43,18 @@ import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
     InitializableSingleton(classType: SettingsService),
     InitializableSingleton(classType: AppearanceSettingsService),
     InitializableSingleton(classType: AboutSettingsService),
+    InitializableSingleton(classType: AuthSettingsService),
+    LazySingleton(classType: AuthService),
     LazySingleton(classType: PathsService),
     LazySingleton(classType: LogsService),
     LazySingleton(classType: UpdaterService),
     LazySingleton(classType: FontImporterService),
+    LazySingleton(classType: DatabaseService),
 // @stacked-service
   ],
   dialogs: [
-    StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: AboutAppDialog),
+    StackedDialog(classType: AddBoxDialog),
 // @stacked-dialog
   ],
 )

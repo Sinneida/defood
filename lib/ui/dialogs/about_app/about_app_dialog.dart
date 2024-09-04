@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -20,27 +22,29 @@ class AboutAppDialog extends StackedView<AboutAppDialogModel> {
     AboutAppDialogModel viewModel,
     Widget? child,
   ) {
-    return AboutDialog(
-      applicationName: 'DeFood',
-      applicationVersion: viewModel.version,
-      // TODO: Enable when icon is created
-      // applicationIcon: const CircleAvatar(
-      //   radius: 28,
-      //   backgroundImage: AssetImage('assets/icon/glassdown.png'),
-      // ),
-      children: [
-        Text.rich(
-          TextSpan(
-            text: viewModel.message,
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      child: AboutDialog(
+        applicationName: 'DeFood',
+        applicationVersion: viewModel.version,
+        // TODO: Enable when icon is created
+        // applicationIcon: const CircleAvatar(
+        //   radius: 28,
+        //   backgroundImage: AssetImage('assets/icon/glassdown.png'),
+        // ),
+        children: [
+          Text.rich(
+            TextSpan(
+              text: viewModel.message,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   @override
-  AboutAppDialogModel viewModelBuilder(BuildContext context) =>
-      AboutAppDialogModel();
+  AboutAppDialogModel viewModelBuilder(BuildContext context) => AboutAppDialogModel();
 
   @override
   void onViewModelReady(AboutAppDialogModel viewModel) {

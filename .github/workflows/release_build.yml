@@ -29,25 +29,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: "17"
-          cache: 'gradle'
+        run: echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.1"
+          flutter-version: "3.24.x"
           channel: 'stable'
           cache: true
 
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Get stacked CLI
-        run: dart pub global activate stacked_cli
-        
       - name: Generate dotenv
         run: |
           touch .env
@@ -55,13 +45,31 @@ jobs:
           echo UPDATE_URL='${{ vars.UPDATE_URL }}' >> .env
           echo API_URL='${{ secrets.API_URL }}' >> .env
           echo API_KEY='${{ secrets.API_KEY }}' >> .env
+          echo WEB_CLIENT_ID='${{ secrets.WEB_CLIENT_ID }}' >> .env
+          echo CLIENT_ID='${{ secrets.CLIENT_ID }}' >> .env
 
+      - name: Get dependencies
+        run: flutter pub get
 
-      - name: Run build_runner
-        run: stacked generate
+      - name: Generate code files
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Generate translations
+        run: dart run slang
+
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
+
+      - name: Create key.properties
+        run: |
+          echo 'storePassword=${{ secrets.KEYSTORE_PASSWORD }}' > android/key.properties
+          echo 'keyPassword=${{ secrets.KEYSTORE_PASSWORD }}' >> android/key.properties
+          echo 'keyAlias=${{ secrets.KEYSTORE_PASSWORD_ALIAS }}' >> android/key.properties
+          echo 'storeFile=keystore.jks' >> android/key.properties
 
       - name: Start release build
-        run: flutter build apk --obfuscate --split-debug-info=/home/runner --split-per-abi --target-platform android-arm,android-arm64
+        run: flutter build apk --release --obfuscate --split-debug-info=/home/runner --split-per-abi --target-platform android-arm,android-arm64
 
       - name: Sign APK
         id: sign_apk

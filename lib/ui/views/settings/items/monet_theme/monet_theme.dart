@@ -22,9 +22,8 @@ class MonetTheme extends StackedView<MonetThemeModel> {
         mainText: 'Material You',
         secondaryText: 'Get colors from your system',
         trailingWidget: Switch(
-          onChanged: viewModel.supportMonet
-              ? (value) => viewModel.updateValue(value)
-              : null,
+          onChanged:
+              viewModel.supportMonet ? (value) => viewModel.updateValue(value) : null,
           value: viewModel.monetEnabled,
         ),
       ),

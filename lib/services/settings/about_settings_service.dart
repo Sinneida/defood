@@ -10,9 +10,9 @@ enum AboutSettingsKey {
   devOptions,
 }
 
-final class AboutSettingsService
+final class AboutSettingsService extends SettingsFragment
     with ListenableServiceMixin
-    implements SettingsFragment, InitializableDependency {
+    implements InitializableDependency {
   AboutSettingsService() {
     listenToReactiveValues([
       _shownPermissions,
@@ -22,15 +22,14 @@ final class AboutSettingsService
 
   @override
   Future<void> init() async {
-    _shownPermissions =
-        _settings.prefs.getBool(AboutSettingsKey.shownPermissions.name) ??
-            _shownPermissions;
+    _shownPermissions = _settings.prefs.getBool(AboutSettingsKey.shownPermissions.name) ??
+        _shownPermissions;
     _disableUpdates =
-        _settings.prefs.getBool(AboutSettingsKey.disableUpdates.name) ??
-            _disableUpdates;
+        _settings.prefs.getBool(AboutSettingsKey.disableUpdates.name) ?? _disableUpdates;
   }
 
   final _settings = locator<SettingsService>();
+  SettingsService get settings => _settings;
 
   bool _devOptions = false;
   bool get devOptions => _devOptions;
@@ -42,8 +41,7 @@ final class AboutSettingsService
   bool get disableUpdates => _disableUpdates;
 
   @override
-  Future<void> setPref<T extends Object>(Enum key, T value,
-      [bool save = true]) async {
+  Future<void> setPref<T extends Object>(Enum key, T value, [bool save = true]) async {
     switch (key) {
       case AboutSettingsKey.shownPermissions:
         _shownPermissions = value as bool;

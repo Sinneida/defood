@@ -39,8 +39,7 @@ class UpdaterService with ListenableServiceMixin {
   bool get isDev => _isDev;
   String _version = '';
 
-  Future<bool?> downloadUpdate(
-      AppReleaseInfo version, CancelToken token) async {
+  Future<bool?> downloadUpdate(AppReleaseInfo version, CancelToken token) async {
     try {
       final app = await _dio.get<List<int>>(
         version.url!,
@@ -131,8 +130,7 @@ class UpdaterService with ListenableServiceMixin {
     final String tagName = data['tag_name'];
 
     if (!_isDev) {
-      final currentVersion =
-          _version.contains('dev') ? _version.split('-')[0] : _version;
+      final currentVersion = _version.contains('dev') ? _version.split('-')[0] : _version;
       final version = int.tryParse(currentVersion.split('.').join());
       final newVersion = int.tryParse(tagName.substring(1).split('.').join());
 

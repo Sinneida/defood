@@ -1,6 +1,6 @@
 {
     "dialogs_path": "ui/dialogs",
-    "line_length": 80,
+    "line_length": 90,
     "locator_name": "locator",
     "prefer_web": false,
     "services_path": "services",
