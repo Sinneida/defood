@@ -29,7 +29,7 @@ class PermissionsViewModel extends BaseViewModel {
 
   Future<void> goHome() async {
     await createAppDir();
-    _aboutSettings.setPref<bool>(AboutSettingsKey.shownPermissions, true);
+    await _aboutSettings.setPref<bool>(AboutSettingsKey.shownPermissions, true);
     _nav.clearStackAndShow(Routes.loginView);
   }
 
