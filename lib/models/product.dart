@@ -31,6 +31,7 @@ class Product with ProductMappable {
   @MappableField(key: 'updated_at')
   final DateTime updatedAt;
   final String email;
+  @MappableField(key: 'box_id')
   final int boxId;
 
   static const fromMap = ProductMapper.fromMap;
