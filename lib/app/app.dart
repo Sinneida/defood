@@ -21,6 +21,7 @@ import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
 import 'package:defood/ui/views/login/login_view.dart';
 import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
 import 'package:defood/ui/views/products/products_view.dart';
+import 'package:defood/ui/views/box_details/box_details_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -33,6 +34,7 @@ import 'package:defood/ui/views/products/products_view.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: PermissionsView),
     MaterialRoute(page: ProductsView),
+    MaterialRoute(page: BoxDetailsView),
 // @stacked-route
   ],
   dependencies: [
