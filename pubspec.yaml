@@ -66,8 +66,8 @@ flutter:
     - "assets/images/food.svg"
 
 flutter_native_splash:
-  color: "#024270"
-  image: assets/icon/glassdown.png
+  color: "#c5c6f6"
+  image: assets/icon/defood.png
   android_12:
-    image: assets/icon/glassdown_a12.png
-    color: "#024270"
+    image: assets/icon/defood_a12.png
+    color: "#c5c6f6"
