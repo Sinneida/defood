@@ -36,7 +36,7 @@ class DatabaseService with LoggerHelper {
       isAuthOk();
       final result = await _db
           .from(Tables.boxes)
-          .select('id, name, created_at, updated_at, email, products(id, name)')
+          .select('id, name, created_at, updated_at, email, products("*")')
           .eq(
             BoxesTable.email,
             _auth.userEmail!,

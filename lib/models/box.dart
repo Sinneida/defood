@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:defood/models/product.dart';
 
 part 'box.mapper.dart';
 
@@ -15,7 +16,7 @@ class Box with BoxMappable {
 
   final int id;
   final String name;
-  final List<dynamic>? products;
+  final List<Product>? products;
   @MappableField(key: 'created_at')
   final String createdAt;
   @MappableField(key: 'updated_at')
