@@ -42,9 +42,15 @@ class ProductCard extends StackedView<ProductCardModel> {
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16))),
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
           collapsedShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16))),
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
           title: Text(product.name),
           // subtitle: Text(
           //   'Expiration date: ${DateFormat('dd-MM-yyyy').format(
@@ -79,13 +85,17 @@ class ProductCard extends StackedView<ProductCardModel> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Created:\n${DateFormat('dd-MM-yyyy HH:mm').format(
-                      product.createdAt,
-                    )}'),
+                    Text(
+                      'Created:\n${DateFormat('dd-MM-yyyy HH:mm').format(
+                        product.createdAt,
+                      )}',
+                    ),
                     verticalSpaceTiny,
-                    Text('Updated:\n${DateFormat('dd-MM-yyyy HH:mm').format(
-                      product.updatedAt,
-                    )}'),
+                    Text(
+                      'Updated:\n${DateFormat('dd-MM-yyyy HH:mm').format(
+                        product.updatedAt,
+                      )}',
+                    ),
                   ],
                 ),
               ],
