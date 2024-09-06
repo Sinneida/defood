@@ -1,10 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:defood/ui/views/boxes/boxes_view.dart';
 import 'package:defood/ui/views/products/products_view.dart';
-import 'package:defood/ui/views/recipes/recipes_view.dart';
-import 'package:defood/ui/views/schedule/schedule_view.dart';
 import 'package:defood/ui/views/settings/settings_view.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:stacked/stacked.dart';
 import 'package:defood/gen/strings.g.dart';
 
@@ -19,11 +18,11 @@ class NavigationView extends StackedView<NavigationViewModel> {
         return const BoxesView();
       case 1:
         return const ProductsView();
+      // case 2:
+      //   return const RecipesView();
+      // case 3:
+      //   return const ScheduleView();
       case 2:
-        return const RecipesView();
-      case 3:
-        return const ScheduleView();
-      case 4:
         return const SettingsView();
       default:
         return const BoxesView();
@@ -54,21 +53,21 @@ class NavigationView extends StackedView<NavigationViewModel> {
         selectedIndex: viewModel.currentIndex,
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.inbox),
+            icon: const Icon(Symbols.package_2),
             label: t.boxes.name,
           ),
           const NavigationDestination(
-            icon: Icon(Icons.shopping_basket_outlined),
+            icon: Icon(Icons.shopping_cart_outlined),
             label: 'Products',
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.receipt),
-            label: t.recipes.name,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.schedule),
-            label: t.schedule.name,
-          ),
+          // NavigationDestination(
+          //   icon: const Icon(Icons.receipt_long_outlined),
+          //   label: t.recipes.name,
+          // ),
+          // NavigationDestination(
+          //   icon: const Icon(Icons.schedule),
+          //   label: t.schedule.name,
+          // ),
           NavigationDestination(
             icon: const Icon(Icons.settings),
             label: t.settings.name,
