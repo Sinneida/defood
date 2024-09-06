@@ -41,6 +41,7 @@ class BoxCard extends StackedView<BoxCardModel> {
         clipBehavior: Clip.antiAlias,
         surfaceTintColor: Theme.of(context).colorScheme.primary,
         child: ListTile(
+          onTap: () => viewModel.openBoxDetails(box),
           leading: const Icon(Icons.ac_unit),
           title: Text(box.name),
           subtitle: Text(
