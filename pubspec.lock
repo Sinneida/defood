@@ -315,10 +315,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "0dfb6b6a1979dac1c1245e17cef824d7b452ea29bd33d3467269f9bef3715fb0"
+      sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"
       url: "https://pub.dev"
     source: hosted
-    version: "5.6.0"
+    version: "5.7.0"
   dio_web_adapter:
     dependency: transitive
     description:
@@ -445,10 +445,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_logs
-      sha256: e13f1ca8ce76849b40aaf25a40bb58748e47093f1f36efd6b454e25e8e34e65f
+      sha256: f1260ca25bbc853ac1c33c94ef80493d595ed67a51a3d61a3be7a9d097901a42
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.12"
+    version: "2.2.0"
   flutter_markdown:
     dependency: "direct main"
     description:
@@ -791,10 +791,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_symbols_icons
-      sha256: b72bf7566d024d51627dce81b1b98539830a0e3ffbb5784989aa3e97c8493160
+      sha256: "66416c4e30bd363508e12669634fc4f3250b83b69e862de67f4f9c480cf42414"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2784.0"
+    version: "4.2785.1"
   meta:
     dependency: transitive
     description:
@@ -1196,10 +1196,10 @@ packages:
     dependency: "direct main"
     description:
       name: stacked_services
-      sha256: "5cb55065d85c395da3d37ec0e52ace7f6e367c0b8477aace8c8479009e02cb41"
+      sha256: "01c5b1875d383b39dce780ee0a8ce4de99f2500d52d2e26676e787fd163e36bd"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.5.1"
   stacked_shared:
     dependency: transitive
     description:
