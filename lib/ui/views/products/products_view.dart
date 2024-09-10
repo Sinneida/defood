@@ -62,19 +62,19 @@ class ProductsView extends StackedView<ProductsViewModel> {
         overlayStyle: ExpandableFabOverlayStyle(
           color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
         ),
-        children: const [
+        children: [
           Row(
             children: [
-              Text('Scan'),
-              SizedBox(width: 20),
+              const Text('Scan'),
+              const SizedBox(width: 20),
               FloatingActionButton.small(
                 heroTag: null,
-                onPressed: null,
-                child: Icon(Icons.barcode_reader),
+                onPressed: () => viewModel.showCamera(),
+                child: const Icon(Icons.barcode_reader),
               ),
             ],
           ),
-          Row(
+          const Row(
             children: [
               Text('Add manually'),
               SizedBox(width: 20),
