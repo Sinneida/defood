@@ -4,11 +4,7 @@ import 'package:defood/services/settings/base/settings_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-enum AboutSettingsKey {
-  shownPermissions,
-  disableUpdates,
-  devOptions,
-}
+enum AboutSettingsKey { shownPermissions, disableUpdates, devOptions, canUseCamera }
 
 final class AboutSettingsService extends SettingsFragment
     with ListenableServiceMixin
@@ -40,6 +36,9 @@ final class AboutSettingsService extends SettingsFragment
   bool _disableUpdates = false;
   bool get disableUpdates => _disableUpdates;
 
+  bool _canUseCamera = false;
+  bool get canUseCamera => _canUseCamera;
+
   @override
   Future<void> setPref<T extends Object>(Enum key, T value, [bool save = true]) async {
     switch (key) {
@@ -49,6 +48,8 @@ final class AboutSettingsService extends SettingsFragment
         _disableUpdates = value as bool;
       case AboutSettingsKey.devOptions:
         _devOptions = value as bool;
+      case AboutSettingsKey.canUseCamera:
+        _canUseCamera = value as bool;
     }
     if (save == true) {
       await _settings.savePref<T>(key, value);

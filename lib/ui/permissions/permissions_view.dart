@@ -85,6 +85,35 @@ class PermissionsView extends StackedView<PermissionsViewModel> {
                               clipBehavior: Clip.antiAlias,
                               elevation: 1,
                               child: ListTile(
+                                onTap: () => viewModel.requestCameraPermission(),
+                                title: const Text('Access camera'),
+                                subtitle: const Text(
+                                  'Allow to scan products barcodes',
+                                ),
+                                tileColor: !viewModel.camera
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .surfaceTint
+                                        .withAlpha(20)
+                                    : Colors.lightGreenAccent.withAlpha(40),
+                                trailing: !viewModel.camera
+                                    ? const Icon(
+                                        Icons.close,
+                                        color: Colors.redAccent,
+                                        size: 30,
+                                      )
+                                    : const Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                        size: 30,
+                                      ),
+                              ),
+                            ),
+                            verticalSpaceTiny,
+                            Card(
+                              clipBehavior: Clip.antiAlias,
+                              elevation: 1,
+                              child: ListTile(
                                 onTap: () => viewModel.requestUpdatesPermission(),
                                 title: const Text('Disable updates prompting'),
                                 subtitle: const Text(
