@@ -3,6 +3,7 @@ import 'package:defood/services/custom_themes_service.dart';
 import 'package:defood/services/database_service.dart';
 import 'package:defood/services/font_importer_service.dart';
 import 'package:defood/services/logs_service.dart';
+import 'package:defood/services/off_service.dart';
 import 'package:defood/services/paths_service.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
@@ -54,6 +55,7 @@ import 'package:defood/ui/views/camera/camera_view.dart';
     LazySingleton(classType: UpdaterService),
     LazySingleton(classType: FontImporterService),
     LazySingleton(classType: DatabaseService),
+    LazySingleton(classType: OpenFoodFactsService),
 // @stacked-service
   ],
   dialogs: [

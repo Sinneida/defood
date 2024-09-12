@@ -14,9 +14,9 @@ class OpenFoodFactsService {
     OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.POLAND;
   }
 
-  Future<void> getProductData() async {
+  Future<void> getProductData(String barcode) async {
     final config = ProductQueryConfiguration(
-      '20417970',
+      barcode,
       version: ProductQueryVersion.v3,
     );
     final product = await OpenFoodAPIClient.getProductV3(config);
