@@ -9,10 +9,9 @@ class AnalyzeImageFromGalleryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      color: Colors.white,
+    return TextButton.icon(
+      label: const Text('Gallery'),
       icon: const Icon(Icons.image),
-      iconSize: 32.0,
       onPressed: () async {
         final ImagePicker picker = ImagePicker();
 
@@ -139,36 +138,34 @@ class ToggleFlashlightButton extends StatelessWidget {
 
         switch (state.torchState) {
           case TorchState.auto:
-            return IconButton(
-              color: Colors.white,
-              iconSize: 32.0,
+            return TextButton.icon(
+              label: const Text('Auto'),
               icon: const Icon(Icons.flash_auto),
               onPressed: () async {
                 await controller.toggleTorch();
               },
             );
           case TorchState.off:
-            return IconButton(
-              color: Colors.white,
-              iconSize: 32.0,
+            return TextButton.icon(
+              label: const Text('Off'),
               icon: const Icon(Icons.flash_off),
               onPressed: () async {
                 await controller.toggleTorch();
               },
             );
           case TorchState.on:
-            return IconButton(
-              color: Colors.white,
-              iconSize: 32.0,
+            return TextButton.icon(
+              label: const Text('On'),
               icon: const Icon(Icons.flash_on),
               onPressed: () async {
                 await controller.toggleTorch();
               },
             );
           case TorchState.unavailable:
-            return const Icon(
-              Icons.no_flash,
-              color: Colors.grey,
+            return TextButton.icon(
+              label: const Text('Auto'),
+              icon: const Icon(Icons.no_flash),
+              onPressed: null,
             );
         }
       },
