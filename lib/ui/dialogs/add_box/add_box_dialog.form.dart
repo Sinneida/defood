@@ -14,8 +14,7 @@ const bool _autoTextFieldValidation = true;
 
 const String BoxNameValueKey = 'boxName';
 
-final Map<String, TextEditingController> _AddBoxDialogTextEditingControllers =
-    {};
+final Map<String, TextEditingController> _AddBoxDialogTextEditingControllers = {};
 
 final Map<String, FocusNode> _AddBoxDialogFocusNodes = {};
 
@@ -37,8 +36,7 @@ mixin $AddBoxDialog {
       return _AddBoxDialogTextEditingControllers[key]!;
     }
 
-    _AddBoxDialogTextEditingControllers[key] =
-        TextEditingController(text: initialValue);
+    _AddBoxDialogTextEditingControllers[key] = TextEditingController(text: initialValue);
     return _AddBoxDialogTextEditingControllers[key]!;
   }
 
@@ -106,10 +104,8 @@ mixin $AddBoxDialog {
 }
 
 extension ValueProperties on FormStateHelper {
-  bool get hasAnyValidationMessage => this
-      .fieldsValidationMessages
-      .values
-      .any((validation) => validation != null);
+  bool get hasAnyValidationMessage =>
+      this.fieldsValidationMessages.values.any((validation) => validation != null);
 
   bool get isFormValid {
     if (!_autoTextFieldValidation) this.validateForm();
@@ -136,8 +132,7 @@ extension ValueProperties on FormStateHelper {
   bool get hasBoxNameValidationMessage =>
       this.fieldsValidationMessages[BoxNameValueKey]?.isNotEmpty ?? false;
 
-  String? get boxNameValidationMessage =>
-      this.fieldsValidationMessages[BoxNameValueKey];
+  String? get boxNameValidationMessage => this.fieldsValidationMessages[BoxNameValueKey];
 }
 
 extension Methods on FormStateHelper {
@@ -170,7 +165,6 @@ String? getValidationMessage(String key) {
 }
 
 /// Updates the fieldsValidationMessages on the FormViewModel
-void updateValidationData(FormStateHelper model) =>
-    model.setValidationMessages({
+void updateValidationData(FormStateHelper model) => model.setValidationMessages({
       BoxNameValueKey: getValidationMessage(BoxNameValueKey),
     });
