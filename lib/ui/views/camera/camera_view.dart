@@ -51,6 +51,7 @@ class CameraView extends StackedView<CameraViewModel> {
   void onViewModelReady(CameraViewModel viewModel) {
     super.onViewModelReady(viewModel);
     unawaited(viewModel.controller.start());
+    viewModel.init();
   }
 
   @override
