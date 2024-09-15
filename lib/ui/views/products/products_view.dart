@@ -10,7 +10,7 @@ import 'products_viewmodel.dart';
 class ProductsView extends StackedView<ProductsViewModel> {
   const ProductsView({
     super.key,
-    required this.isDetailsView,
+    this.isDetailsView = false,
     this.products,
   });
 
