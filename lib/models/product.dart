@@ -24,7 +24,7 @@ class Product with ProductMappable {
   final DateTime expirationDate;
   @MappableField(key: 'expiration_type')
   final String expirationType;
-  final double price;
+  final double? price;
   final int amount;
   @MappableField(key: 'created_at')
   final DateTime createdAt;
