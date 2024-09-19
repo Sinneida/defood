@@ -1,36 +1,41 @@
 import 'dart:ui';
 
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
+import 'package:defood/ui/dialogs/add_product/add_product_dialog.form.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'add_product_dialog_model.dart';
+import 'package:flutter/services.dart';
 
-// ignore: must_be_immutable
-class AddProductDialog extends StackedView<AddProductDialogModel> {
+@FormView(
+  fields: [
+    FormTextField(
+      name: 'productName',
+      validator: AddProductValidators.validateProductName,
+    ),
+    FormTextField(
+      name: 'amount',
+      validator: AddProductValidators.validateAmount,
+    ),
+    FormTextField(
+      name: 'price',
+      validator: AddProductValidators.validatePrice,
+    ),
+  ],
+)
+class AddProductDialog extends StackedView<AddProductDialogModel> with $AddProductDialog {
   final DialogRequest request;
-  final Function(DialogResponse) completer;
+  final Function(DialogResponse<ProductDto?>) completer;
 
-  AddProductDialog({
+  const AddProductDialog({
     super.key,
     required this.request,
     required this.completer,
   });
-
-  DateTime selectedDate = DateTime.now();
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
-    }
-  }
 
   @override
   Widget builder(
@@ -46,44 +51,180 @@ class AddProductDialog extends StackedView<AddProductDialogModel> {
       child: AlertDialog(
         title: const Text('New product'),
         backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Expiration date',
-                      style: TextStyle(
-                        fontSize: Theme.of(context).textTheme.labelLarge?.fontSize ?? 16,
-                      ),
+        alignment: Alignment.bottomCenter,
+        scrollable: true,
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                controller: productNameController,
+                decoration: inputDecoration('Product name'),
+              ),
+              verticalSpaceMedium,
+              TextFormField(
+                controller: amountController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                keyboardType: TextInputType.number,
+                decoration: inputDecoration('Amount'),
+              ),
+              verticalSpaceMedium,
+              TextFormField(
+                controller: priceController,
+                inputFormatters: [
+                  CurrencyTextInputFormatter.currency(
+                    locale: 'pl',
+                    minValue: 0.01,
+                    decimalDigits: 2,
+                  ),
+                ],
+                keyboardType: TextInputType.number,
+                decoration: inputDecoration('Price'),
+              ),
+              verticalSpaceMedium,
+              Card(
+                clipBehavior: Clip.antiAlias,
+                color: Theme.of(context).colorScheme.surfaceDim,
+                child: const ExpansionTile(
+                  title: Text('Expiration types'),
+                  expandedAlignment: Alignment.centerLeft,
+                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                  childrenPadding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
                     ),
-                    verticalSpaceTiny,
-                    FilledButton.tonalIcon(
+                  ),
+                  collapsedShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
+                  ),
+                  leading: Icon(Icons.info_outline),
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Soft: Best before'),
+                        Text('Hard: Expiration date'),
+                        Text('Custom: Your own amount of days before product expires'),
+                        Text("Not Apply: Expiration date doesn't apply to this product"),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              verticalSpaceMedium,
+              DropdownButtonFormField<ExpirationType>(
+                value: ExpirationType.soft,
+                decoration: inputDecoration('Expiration type'),
+                items: const [
+                  DropdownMenuItem(
+                    value: ExpirationType.soft,
+                    child: Text('Soft'),
+                  ),
+                  DropdownMenuItem(
+                    value: ExpirationType.hard,
+                    child: Text('Hard'),
+                  ),
+                  DropdownMenuItem(
+                    enabled: false,
+                    value: ExpirationType.custom,
+                    child: Text('Custom'),
+                  ),
+                  DropdownMenuItem(
+                    value: ExpirationType.notApply,
+                    child: Text('Not Apply'),
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value != null) {
+                    viewModel.expirationType = value;
+                  }
+                },
+              ),
+              verticalSpaceMedium,
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.tonalIcon(
                       label: Text(
-                        viewModel.formatDate(selectedDate),
+                        viewModel.formattedDate(),
                       ),
-                      onPressed: () => _selectDate(context),
+                      onPressed: () => viewModel.selectDate(context),
                       icon: const Icon(
                         Icons.calendar_today_rounded,
                         size: 16,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              completer(DialogResponse<ProductDto?>(confirmed: true, data: null));
+            },
+            child: const Text('Cancel'),
+          ),
+          if (!viewModel.hasAnyValidationMessage)
+            FilledButton(
+              onPressed: () {
+                final ProductDto value = (
+                  name: viewModel.productNameValue!.trim(),
+                  amount: viewModel.amountValue!.trim(),
+                  price: viewModel.priceValue?.trim(),
+                  expirationDate: viewModel.selectedDate,
+                  expirationType: viewModel.expirationType,
+                );
+                viewModel.clearForm();
+                completer(DialogResponse<ProductDto?>(confirmed: true, data: value));
+              },
+              child: const Text('Add'),
+            )
+          else
+            const FilledButton(
+              onPressed: null,
+              child: Text('Add'),
+            )
+        ],
+      ),
+    );
+  }
+
+  InputDecoration inputDecoration(String label) {
+    return InputDecoration(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(75),
+        borderSide: const BorderSide(
+          width: 0,
+          style: BorderStyle.none,
         ),
       ),
+      label: Text(label),
+      filled: true,
+      isDense: true,
     );
   }
 
   @override
   AddProductDialogModel viewModelBuilder(BuildContext context) => AddProductDialogModel();
+
+  @override
+  void onViewModelReady(AddProductDialogModel viewModel) {
+    syncFormWithViewModel(viewModel);
+  }
+
+  @override
+  void onDispose(AddProductDialogModel viewModel) {
+    super.onDispose(viewModel);
+    disposeForm();
+  }
 }
