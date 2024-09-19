@@ -25,7 +25,7 @@ class CameraViewModel extends BaseViewModel with NotificationHelper, LoggerHelpe
   Future<void> init() async {
     try {
       _camera = await Permission.camera.status.isGranted;
-      if (_camera) {
+      if (!_camera) {
         await requestCameraPermission();
         if (_camera) {
           _nav.back();
