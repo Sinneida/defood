@@ -6,10 +6,12 @@ import 'package:defood/models/errors/base/app_error.dart';
 import 'package:defood/models/product.dart';
 import 'package:defood/services/database_service.dart';
 import 'package:defood/services/off_service.dart';
+import 'package:defood/ui/dialogs/add_product/add_product_dialog_model.dart';
 import 'package:defood/ui/views/camera/camera_view.dart';
 import 'package:defood/utils/logger_helper.dart';
 import 'package:defood/utils/notification_helper.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -33,19 +35,27 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
 
   Future<void> showCamera() async {
     try {
-      final barcode = await _nav.navigateToView<Barcode>(const CameraView());
-      print('Product barcode: ${barcode.toString()}');
-      await _off.getProductData(barcode!.rawValue!);
+      final barcode = await _nav.navigateToView<Barcode>(
+        const CameraView(),
+        preventDuplicates: false,
+      );
+      if (barcode != null) {
+        final product = await _off.getProductData(barcode.rawValue!);
+        await _dialog.showCustomDialog<ProductDto?, Product>(
+          variant: DialogType.addProduct,
+          data: product,
+        );
+      }
     } catch (e) {
       notifyError('Failed to show camera view');
       notifyError(e.toString());
+      logError('Failed to show camera', e);
     }
   }
 
   Future<void> showAddProduct() async {
     try {
-      final result =
-          await _dialog.showCustomDialog<void, void>(variant: DialogType.addProduct);
+      await _dialog.showCustomDialog<void, void>(variant: DialogType.addProduct);
     } catch (e) {
       final msg = e is AppError ? e.message : e.toString();
       logInfo(msg);
