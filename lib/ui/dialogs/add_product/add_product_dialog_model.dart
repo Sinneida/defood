@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:intl/intl.dart';
 
@@ -26,6 +27,8 @@ class AddProductDialogModel extends FormViewModel {
   }
 
   ExpirationType expirationType = ExpirationType.soft;
+
+  Product? product;
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(

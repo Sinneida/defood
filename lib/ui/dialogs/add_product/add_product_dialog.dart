@@ -4,6 +4,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/dialogs/add_product/add_product_dialog.form.dart';
 import 'package:flutter/material.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -185,7 +186,9 @@ class AddProductDialog extends StackedView<AddProductDialogModel> with $AddProdu
                   expirationType: viewModel.expirationType,
                 );
                 viewModel.clearForm();
-                completer(DialogResponse<ProductDto?>(confirmed: true, data: value));
+                completer(
+                  DialogResponse<ProductDto>(confirmed: true, data: value),
+                );
               },
               child: const Text('Add'),
             )
@@ -220,6 +223,11 @@ class AddProductDialog extends StackedView<AddProductDialogModel> with $AddProdu
   @override
   void onViewModelReady(AddProductDialogModel viewModel) {
     syncFormWithViewModel(viewModel);
+    viewModel.product = (request.data != null && request.data is Product)
+        ? request.data as Product
+        : null;
+    productNameController.text =
+        viewModel.product?.productNameInLanguages?[OpenFoodFactsLanguage.POLISH] ?? '';
   }
 
   @override
