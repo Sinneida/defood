@@ -10,7 +10,7 @@ class BoxCardModel extends BaseViewModel with NotificationHelper {
   final _db = locator<DatabaseService>();
   final _nav = locator<NavigationService>();
 
-  Future<void> deleteBox(Box box, void Function(int id) removeBox) async {
+  Future<void> deleteBox(BoxModel box, void Function(int id) removeBox) async {
     try {
       final result = await _db.deleteBox(box.id);
       if (result) {
@@ -23,7 +23,7 @@ class BoxCardModel extends BaseViewModel with NotificationHelper {
     }
   }
 
-  void openBoxDetails(Box box) {
+  void openBoxDetails(BoxModel box) {
     if (box.products != null) {
       _nav.navigateWithTransition(
         ProductsView(

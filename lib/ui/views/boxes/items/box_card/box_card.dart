@@ -7,7 +7,7 @@ import 'box_card_model.dart';
 class BoxCard extends StackedView<BoxCardModel> {
   const BoxCard(this.box, this.removeBox, {super.key});
 
-  final Box box;
+  final BoxModel box;
   final void Function(int id) removeBox;
 
   @override

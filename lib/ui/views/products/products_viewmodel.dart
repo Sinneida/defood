@@ -19,7 +19,7 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
   final _off = locator<OpenFoodFactsService>();
   final _dialog = locator<DialogService>();
 
-  List<Product> products = [];
+  List<ProductModel> products = [];
 
   Future<void> loadAllProducts() async {
     try {

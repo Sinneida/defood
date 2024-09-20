@@ -8,7 +8,7 @@ import 'package:stacked/stacked.dart';
 class ProductCard extends StackedView<ProductCardModel> {
   const ProductCard(this.product, {super.key});
 
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget builder(BuildContext context, ProductCardModel viewModel, Widget? child) {

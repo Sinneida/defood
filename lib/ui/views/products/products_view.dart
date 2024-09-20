@@ -15,7 +15,7 @@ class ProductsView extends StackedView<ProductsViewModel> {
   });
 
   final bool isDetailsView;
-  final List<Product>? products;
+  final List<ProductModel>? products;
 
   @override
   Widget builder(

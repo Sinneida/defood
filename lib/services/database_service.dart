@@ -31,7 +31,7 @@ class DatabaseService with LoggerHelper {
     }
   }
 
-  Future<List<Box>> loadAllBoxes() async {
+  Future<List<BoxModel>> loadAllBoxes() async {
     try {
       isAuthOk();
       final result = await _db
@@ -41,28 +41,28 @@ class DatabaseService with LoggerHelper {
             BoxesTable.email,
             _auth.userEmail!,
           );
-      return result.map((e) => Box.fromMap(e)).toList();
+      return result.map((e) => BoxModel.fromMap(e)).toList();
     } catch (e) {
       logError('Failed to load boxes', e);
       rethrow;
     }
   }
 
-  Future<List<Product>> loadAllProducts() async {
+  Future<List<ProductModel>> loadAllProducts() async {
     try {
       isAuthOk();
       final result = await _db.from(Tables.products).select().eq(
             'email',
             _auth.userEmail!,
           );
-      return result.map((e) => Product.fromMap(e)).toList();
+      return result.map((e) => ProductModel.fromMap(e)).toList();
     } catch (e) {
       logError('Failed to load products', e);
       rethrow;
     }
   }
 
-  Future<List<Box>> createBox(String name) async {
+  Future<List<BoxModel>> createBox(String name) async {
     try {
       isAuthOk();
       final Map<String, dynamic> values = {
@@ -70,7 +70,7 @@ class DatabaseService with LoggerHelper {
         BoxesTable.email: _auth.userEmail,
       };
       final result = await _db.from(Tables.boxes).insert(values).select();
-      return result.map((e) => Box.fromMap(e)).toList();
+      return result.map((e) => BoxModel.fromMap(e)).toList();
     } catch (e) {
       logError('Failed to save new box', e);
       rethrow;
