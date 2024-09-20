@@ -2,7 +2,6 @@ import 'package:defood/models/product.dart';
 import 'package:defood/ui/views/products/widgets/product_card.dart';
 import 'package:defood/ui/widgets/common/placeholder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:stacked/stacked.dart';
 
 import 'products_viewmodel.dart';
@@ -61,59 +60,11 @@ class ProductsView extends StackedView<ProductsViewModel> {
             )
         ],
       ),
-      bottomNavigationBar: isDetailsView
-          ? BottomAppBar(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton.icon(
-                    onPressed: () => viewModel.showCamera(),
-                    icon: const Icon(Icons.barcode_reader),
-                    label: const Text('Scan'),
-                  ),
-                  TextButton.icon(
-                    onPressed: () => viewModel.showAddProduct(),
-                    icon: const Icon(Icons.add_box),
-                    label: const Text('Add manually'),
-                  ),
-                ],
-              ),
-            )
-          : null,
-      floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: !isDetailsView
-          ? ExpandableFab(
-              key: UniqueKey(),
-              type: ExpandableFabType.up,
-              childrenAnimation: ExpandableFabAnimation.none,
-              distance: 70,
-              overlayStyle: ExpandableFabOverlayStyle(
-                color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
-              ),
-              children: [
-                Row(
-                  children: [
-                    const Text('Scan'),
-                    const SizedBox(width: 20),
-                    FloatingActionButton.small(
-                      heroTag: null,
-                      onPressed: () => viewModel.showCamera(),
-                      child: const Icon(Icons.barcode_reader),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text('Add manually'),
-                    const SizedBox(width: 20),
-                    FloatingActionButton.small(
-                      heroTag: null,
-                      onPressed: () => viewModel.showAddProduct(),
-                      child: const Icon(Icons.add_box),
-                    ),
-                  ],
-                ),
-              ],
+      floatingActionButton: isDetailsView
+          ? FloatingActionButton.extended(
+              onPressed: viewModel.showCamera,
+              label: const Text('Scan new'),
+              icon: const Icon(Icons.barcode_reader),
             )
           : null,
     );
