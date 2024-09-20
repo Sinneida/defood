@@ -35,8 +35,13 @@ import 'package:defood/ui/dialogs/add_product/add_product_dialog.dart';
     MaterialRoute(page: ScheduleView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: PermissionsView),
-    MaterialRoute(page: ProductsView),
-    MaterialRoute(page: CameraView),
+    MaterialRoute(
+      page: ProductsView,
+      path: '/products',
+      children: [
+        MaterialRoute(page: CameraView, path: 'camera'),
+      ],
+    ),
 // @stacked-route
   ],
   dependencies: [
