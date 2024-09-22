@@ -1,8 +1,13 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter/material.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:intl/intl.dart';
 
+part 'add_product_dialog_model.mapper.dart';
+
+@MappableEnum()
 enum ExpirationType {
   soft,
   hard,
@@ -13,7 +18,7 @@ enum ExpirationType {
 typedef ProductDto = ({
   String name,
   String amount,
-  String? price,
+  num? price,
   DateTime expirationDate,
   ExpirationType expirationType,
 });

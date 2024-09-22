@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:defood/models/box.dart';
+import 'package:defood/ui/dialogs/add_product/add_product_dialog_model.dart';
 
 part 'product.mapper.dart';
 
@@ -23,7 +24,7 @@ class ProductModel with ProductModelMappable {
   @MappableField(key: 'expiration_date')
   final DateTime expirationDate;
   @MappableField(key: 'expiration_type')
-  final String expirationType;
+  final ExpirationType expirationType;
   final double? price;
   final int amount;
   @MappableField(key: 'created_at')
