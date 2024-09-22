@@ -109,4 +109,14 @@ class DatabaseService with LoggerHelper {
       rethrow;
     }
   }
+
+  Future<void> deleteProduct(int productId) async {
+    try {
+      isAuthOk();
+      await _db.from(Tables.products).delete().eq('id', productId);
+    } catch (e) {
+      logError('Failed to delete product', e);
+      rethrow;
+    }
+  }
 }
