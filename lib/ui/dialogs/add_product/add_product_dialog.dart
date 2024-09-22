@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/dialogs/add_product/add_product_dialog.form.dart';
 import 'package:flutter/material.dart';
@@ -76,13 +75,7 @@ class AddProductDialog extends StackedView<AddProductDialogModel> with $AddProdu
               verticalSpaceMedium,
               TextFormField(
                 controller: priceController,
-                inputFormatters: [
-                  CurrencyTextInputFormatter.currency(
-                    locale: 'pl',
-                    minValue: 0.01,
-                    decimalDigits: 2,
-                  ),
-                ],
+                inputFormatters: [viewModel.currencyFormatter],
                 keyboardType: TextInputType.number,
                 decoration: inputDecoration('Price'),
               ),
@@ -181,7 +174,7 @@ class AddProductDialog extends StackedView<AddProductDialogModel> with $AddProdu
                 final ProductDto value = (
                   name: viewModel.productNameValue!.trim(),
                   amount: viewModel.amountValue!.trim(),
-                  price: viewModel.priceValue?.trim(),
+                  price: viewModel.currencyFormatter.getUnformattedValue(),
                   expirationDate: viewModel.selectedDate,
                   expirationType: viewModel.expirationType,
                 );

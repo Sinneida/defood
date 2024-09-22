@@ -35,6 +35,12 @@ class AddProductDialogModel extends FormViewModel {
 
   Product? product;
 
+  final currencyFormatter = CurrencyTextInputFormatter.currency(
+    locale: 'pl',
+    minValue: 0.01,
+    decimalDigits: 2,
+  );
+
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
