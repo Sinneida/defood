@@ -5,7 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'schedule_viewmodel.dart';
 
 class ScheduleView extends StackedView<ScheduleViewModel> {
-  const ScheduleView({Key? key}) : super(key: key);
+  const ScheduleView({super.key});
 
   @override
   Widget builder(

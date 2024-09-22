@@ -20,6 +20,7 @@ class AuthService with LoggerHelper, ListenableServiceMixin {
     signInOption: SignInOption.standard,
     clientId: Env.clientId,
     serverClientId: Env.webClientId,
+    scopes: ['email'],
   );
 
   final _authClient = Supabase.instance.client.auth;

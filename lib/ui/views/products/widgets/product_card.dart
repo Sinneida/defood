@@ -1,6 +1,7 @@
 import 'package:defood/models/product.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/views/products/widgets/product_card_model.dart';
+import 'package:defood/utils/casing.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -8,7 +9,7 @@ import 'package:stacked/stacked.dart';
 class ProductCard extends StackedView<ProductCardModel> {
   const ProductCard(this.product, {super.key});
 
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget builder(BuildContext context, ProductCardModel viewModel, Widget? child) {
@@ -29,9 +30,9 @@ class ProductCard extends StackedView<ProductCardModel> {
         ),
       ),
       onDismissed: (direction) {
-        // if (direction == DismissDirection.endToStart) {
-        //   viewModel.deleteBox(box, removeBox);
-        // }
+        if (direction == DismissDirection.endToStart) {
+          viewModel.deleteProduct(product.id);
+        }
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -42,9 +43,15 @@ class ProductCard extends StackedView<ProductCardModel> {
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16))),
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
           collapsedShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16))),
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
           title: Text(product.name),
           // subtitle: Text(
           //   'Expiration date: ${DateFormat('dd-MM-yyyy').format(
@@ -63,7 +70,9 @@ class ProductCard extends StackedView<ProductCardModel> {
                       product.expirationDate,
                     )}'),
                     verticalSpaceTiny,
-                    Text('Expiration type:\n${product.expirationType}'),
+                    Text(
+                      'Expiration type:\n${product.expirationType.name.toCapitalized()}',
+                    ),
                   ],
                 ),
                 Column(
@@ -79,13 +88,17 @@ class ProductCard extends StackedView<ProductCardModel> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Created:\n${DateFormat('dd-MM-yyyy HH:mm').format(
-                      product.createdAt,
-                    )}'),
+                    Text(
+                      'Created:\n${DateFormat('dd-MM-yyyy HH:mm').format(
+                        product.createdAt,
+                      )}',
+                    ),
                     verticalSpaceTiny,
-                    Text('Updated:\n${DateFormat('dd-MM-yyyy HH:mm').format(
-                      product.updatedAt,
-                    )}'),
+                    Text(
+                      'Updated:\n${DateFormat('dd-MM-yyyy HH:mm').format(
+                        product.updatedAt,
+                      )}',
+                    ),
                   ],
                 ),
               ],

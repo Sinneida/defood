@@ -7,7 +7,7 @@ import 'box_card_model.dart';
 class BoxCard extends StackedView<BoxCardModel> {
   const BoxCard(this.box, this.removeBox, {super.key});
 
-  final Box box;
+  final BoxModel box;
   final void Function(int id) removeBox;
 
   @override
@@ -41,6 +41,7 @@ class BoxCard extends StackedView<BoxCardModel> {
         clipBehavior: Clip.antiAlias,
         surfaceTintColor: Theme.of(context).colorScheme.primary,
         child: ListTile(
+          onTap: () => viewModel.openBoxDetails(box),
           leading: const Icon(Icons.ac_unit),
           title: Text(box.name),
           subtitle: Text(

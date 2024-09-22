@@ -20,9 +20,12 @@ class PermissionsViewModel extends BaseViewModel {
   bool _updates = false;
   bool get updates => _updates;
 
+  bool _camera = false;
+  bool get camera => _camera;
+
   Future<void> init() async {
-    final installGranted = await Permission.requestInstallPackages.status.isGranted;
-    _install = installGranted;
+    _install = await Permission.requestInstallPackages.status.isGranted;
+    _camera = await Permission.camera.status.isGranted;
     _updates = _aboutSettings.disableUpdates;
     rebuildUi();
   }
@@ -54,6 +57,12 @@ class PermissionsViewModel extends BaseViewModel {
   Future<void> requestUpdatesPermission() async {
     _updates = !_updates;
     await _aboutSettings.setPref<bool>(AboutSettingsKey.disableUpdates, _updates);
+    rebuildUi();
+  }
+
+  Future<void> requestCameraPermission() async {
+    final result = await Permission.camera.request();
+    _camera = result.isGranted;
     rebuildUi();
   }
 }

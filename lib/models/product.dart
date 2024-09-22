@@ -1,11 +1,12 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:defood/models/box.dart';
+import 'package:defood/ui/dialogs/add_product/add_product_dialog_model.dart';
 
 part 'product.mapper.dart';
 
 @MappableClass()
-class Product with ProductMappable {
-  Product(
+class ProductModel with ProductModelMappable {
+  ProductModel(
     this.id,
     this.name,
     this.expirationDate,
@@ -23,8 +24,8 @@ class Product with ProductMappable {
   @MappableField(key: 'expiration_date')
   final DateTime expirationDate;
   @MappableField(key: 'expiration_type')
-  final String expirationType;
-  final double price;
+  final ExpirationType expirationType;
+  final double? price;
   final int amount;
   @MappableField(key: 'created_at')
   final DateTime createdAt;
@@ -34,6 +35,6 @@ class Product with ProductMappable {
   @MappableField(key: 'box_id')
   final int boxId;
 
-  static const fromMap = ProductMapper.fromMap;
-  static const fromJson = BoxMapper.fromJson;
+  static const fromMap = ProductModelMapper.fromMap;
+  static const fromJson = BoxModelMapper.fromJson;
 }

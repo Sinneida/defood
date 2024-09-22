@@ -3,6 +3,7 @@ import 'package:defood/services/custom_themes_service.dart';
 import 'package:defood/services/database_service.dart';
 import 'package:defood/services/font_importer_service.dart';
 import 'package:defood/services/logs_service.dart';
+import 'package:defood/services/off_service.dart';
 import 'package:defood/services/paths_service.dart';
 import 'package:defood/services/settings/about_settings_service.dart';
 import 'package:defood/services/settings/appearance_settings_service.dart';
@@ -21,6 +22,8 @@ import 'package:defood/ui/dialogs/about_app/about_app_dialog.dart';
 import 'package:defood/ui/views/login/login_view.dart';
 import 'package:defood/ui/dialogs/add_box/add_box_dialog.dart';
 import 'package:defood/ui/views/products/products_view.dart';
+import 'package:defood/ui/views/camera/camera_view.dart';
+import 'package:defood/ui/dialogs/add_product/add_product_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -32,7 +35,13 @@ import 'package:defood/ui/views/products/products_view.dart';
     MaterialRoute(page: ScheduleView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: PermissionsView),
-    MaterialRoute(page: ProductsView),
+    MaterialRoute(
+      page: ProductsView,
+      path: '/products',
+      children: [
+        MaterialRoute(page: CameraView, path: 'camera'),
+      ],
+    ),
 // @stacked-route
   ],
   dependencies: [
@@ -50,11 +59,13 @@ import 'package:defood/ui/views/products/products_view.dart';
     LazySingleton(classType: UpdaterService),
     LazySingleton(classType: FontImporterService),
     LazySingleton(classType: DatabaseService),
+    LazySingleton(classType: OpenFoodFactsService),
 // @stacked-service
   ],
   dialogs: [
     StackedDialog(classType: AboutAppDialog),
     StackedDialog(classType: AddBoxDialog),
+    StackedDialog(classType: AddProductDialog),
 // @stacked-dialog
   ],
 )

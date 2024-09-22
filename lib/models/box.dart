@@ -1,10 +1,11 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:defood/models/product.dart';
 
 part 'box.mapper.dart';
 
 @MappableClass()
-class Box with BoxMappable {
-  Box(
+class BoxModel with BoxModelMappable {
+  BoxModel(
     this.id,
     this.name,
     this.products,
@@ -15,13 +16,13 @@ class Box with BoxMappable {
 
   final int id;
   final String name;
-  final List<dynamic>? products;
+  final List<ProductModel>? products;
   @MappableField(key: 'created_at')
   final String createdAt;
   @MappableField(key: 'updated_at')
   final String updatedAt;
   final String email;
 
-  static const fromMap = BoxMapper.fromMap;
-  static const fromJson = BoxMapper.fromJson;
+  static const fromMap = BoxModelMapper.fromMap;
+  static const fromJson = BoxModelMapper.fromJson;
 }

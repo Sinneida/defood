@@ -5,7 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'recipes_viewmodel.dart';
 
 class RecipesView extends StackedView<RecipesViewModel> {
-  const RecipesView({Key? key}) : super(key: key);
+  const RecipesView({super.key});
 
   @override
   Widget builder(

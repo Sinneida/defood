@@ -67,8 +67,7 @@ final class AppearanceSettingsService extends SettingsFragment
   String get customFont => _customFont;
 
   @override
-  Future<void> setPref<T extends Object>(Enum key, T value,
-      [bool saveToDisk = true]) async {
+  Future<void> setPref<T extends Object>(Enum key, T value, [bool save = true]) async {
     switch (key) {
       case AppearanceSettingsKey.themeMode:
         _themeMode = value as ThemeMode;
@@ -81,7 +80,7 @@ final class AppearanceSettingsService extends SettingsFragment
       case AppearanceSettingsKey.customFont:
         _customFont = value as String;
     }
-    if (saveToDisk == true) {
+    if (save == true) {
       await _settings.savePref<T>(key, value);
     }
     notifyListeners();

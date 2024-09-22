@@ -9,10 +9,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'app.locator.dart';
 import '../ui/dialogs/about_app/about_app_dialog.dart';
 import '../ui/dialogs/add_box/add_box_dialog.dart';
+import '../ui/dialogs/add_product/add_product_dialog.dart';
 
 enum DialogType {
   aboutApp,
   addBox,
+  addProduct,
 }
 
 void setupDialogUi() {
@@ -23,6 +25,8 @@ void setupDialogUi() {
         AboutAppDialog(request: request, completer: completer),
     DialogType.addBox: (context, request, completer) =>
         AddBoxDialog(request: request, completer: completer),
+    DialogType.addProduct: (context, request, completer) =>
+        AddProductDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);

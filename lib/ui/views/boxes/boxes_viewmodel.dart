@@ -21,8 +21,8 @@ class BoxesViewModel extends BaseViewModel with NotificationHelper, LoggerHelper
     return _auth.userEmail;
   }
 
-  final List<Box> _boxes = [];
-  List<Box> get boxes => _boxes;
+  final List<BoxModel> _boxes = [];
+  List<BoxModel> get boxes => _boxes;
 
   Future<void> loadAllBoxes() async {
     try {
