@@ -41,10 +41,15 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
       );
       if (barcode != null) {
         final product = await _off.getProductData(barcode.rawValue!);
-        await _dialog.showCustomDialog<ProductDto?, Product>(
+        final result = await _dialog.showCustomDialog<ProductDto?, Product>(
           variant: DialogType.addProduct,
           data: product,
         );
+        if (result != null && result.data != null) {
+          final boxId = products[0].boxId;
+          await _db.addProduct(result.data!, boxId, barcode.rawValue!);
+          notifyInfo('Successfully added product');
+        }
       }
     } catch (e) {
       notifyError('Failed to show camera view');
