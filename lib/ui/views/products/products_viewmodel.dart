@@ -57,14 +57,4 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
       logError('Failed to show camera', e);
     }
   }
-
-  Future<void> showAddProduct() async {
-    try {
-      await _dialog.showCustomDialog<void, void>(variant: DialogType.addProduct);
-    } catch (e) {
-      final msg = e is AppError ? e.message : e.toString();
-      logInfo(msg);
-      notifyError(msg);
-    }
-  }
 }
