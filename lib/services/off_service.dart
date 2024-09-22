@@ -1,4 +1,3 @@
-import 'package:defood/models/errors/base/app_error.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 class OpenFoodFactsService {
@@ -15,14 +14,14 @@ class OpenFoodFactsService {
     OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.POLAND;
   }
 
-  Future<Product> getProductData(String barcode) async {
+  Future<Product?> getProductData(String barcode) async {
     final config = ProductQueryConfiguration(
       barcode,
       version: ProductQueryVersion.v3,
     );
     final product = await OpenFoodAPIClient.getProductV3(config);
     if (product.product == null) {
-      throw AppError('Failed to download product data');
+      return null;
     }
     return product.product!;
     // print(product.product?.productName); // Coca Cola Zero
