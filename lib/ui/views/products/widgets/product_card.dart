@@ -30,9 +30,9 @@ class ProductCard extends StackedView<ProductCardModel> {
         ),
       ),
       onDismissed: (direction) {
-        // if (direction == DismissDirection.endToStart) {
-        //   viewModel.deleteBox(box, removeBox);
-        // }
+        if (direction == DismissDirection.endToStart) {
+          viewModel.deleteProduct(product.id);
+        }
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
