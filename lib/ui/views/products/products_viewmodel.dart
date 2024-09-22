@@ -41,7 +41,7 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
       );
       if (barcode != null) {
         final product = await _off.getProductData(barcode.rawValue!);
-        final result = await _dialog.showCustomDialog<ProductDto?, Product>(
+        final result = await _dialog.showCustomDialog<ProductDto?, Product?>(
           variant: DialogType.addProduct,
           data: product,
         );
@@ -52,8 +52,7 @@ class ProductsViewModel extends BaseViewModel with NotificationHelper, LoggerHel
         }
       }
     } catch (e) {
-      notifyError('Failed to show camera view');
-      notifyError(e.toString());
+      notifyError('Failed to show camera view: $e');
       logError('Failed to show camera', e);
     }
   }
