@@ -1,6 +1,7 @@
 import 'package:defood/models/product.dart';
 import 'package:defood/ui/common/ui_helpers.dart';
 import 'package:defood/ui/views/products/widgets/product_card_model.dart';
+import 'package:defood/utils/casing.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -69,7 +70,9 @@ class ProductCard extends StackedView<ProductCardModel> {
                       product.expirationDate,
                     )}'),
                     verticalSpaceTiny,
-                    Text('Expiration type:\n${product.expirationType}'),
+                    Text(
+                      'Expiration type:\n${product.expirationType.name.toCapitalized()}',
+                    ),
                   ],
                 ),
                 Column(
