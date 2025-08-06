@@ -16,11 +16,13 @@ const String ProductNameValueKey = 'productName';
 const String AmountValueKey = 'amount';
 const String PriceValueKey = 'price';
 
-final Map<String, TextEditingController> _AddProductDialogTextEditingControllers = {};
+final Map<String, TextEditingController>
+    _AddProductDialogTextEditingControllers = {};
 
 final Map<String, FocusNode> _AddProductDialogFocusNodes = {};
 
-final Map<String, String? Function(String?)?> _AddProductDialogTextValidations = {
+final Map<String, String? Function(String?)?> _AddProductDialogTextValidations =
+    {
   ProductNameValueKey: AddProductValidators.validateProductName,
   AmountValueKey: AddProductValidators.validateAmount,
   PriceValueKey: AddProductValidators.validatePrice,
@@ -121,8 +123,10 @@ mixin $AddProductDialog {
 }
 
 extension ValueProperties on FormStateHelper {
-  bool get hasAnyValidationMessage =>
-      this.fieldsValidationMessages.values.any((validation) => validation != null);
+  bool get hasAnyValidationMessage => this
+      .fieldsValidationMessages
+      .values
+      .any((validation) => validation != null);
 
   bool get isFormValid {
     if (!_autoTextFieldValidation) this.validateForm();
@@ -130,7 +134,8 @@ extension ValueProperties on FormStateHelper {
     return !hasAnyValidationMessage;
   }
 
-  String? get productNameValue => this.formValueMap[ProductNameValueKey] as String?;
+  String? get productNameValue =>
+      this.formValueMap[ProductNameValueKey] as String?;
   String? get amountValue => this.formValueMap[AmountValueKey] as String?;
   String? get priceValue => this.formValueMap[PriceValueKey] as String?;
 
@@ -139,8 +144,10 @@ extension ValueProperties on FormStateHelper {
       this.formValueMap..addAll({ProductNameValueKey: value}),
     );
 
-    if (_AddProductDialogTextEditingControllers.containsKey(ProductNameValueKey)) {
-      _AddProductDialogTextEditingControllers[ProductNameValueKey]?.text = value ?? '';
+    if (_AddProductDialogTextEditingControllers.containsKey(
+        ProductNameValueKey)) {
+      _AddProductDialogTextEditingControllers[ProductNameValueKey]?.text =
+          value ?? '';
     }
   }
 
@@ -150,7 +157,8 @@ extension ValueProperties on FormStateHelper {
     );
 
     if (_AddProductDialogTextEditingControllers.containsKey(AmountValueKey)) {
-      _AddProductDialogTextEditingControllers[AmountValueKey]?.text = value ?? '';
+      _AddProductDialogTextEditingControllers[AmountValueKey]?.text =
+          value ?? '';
     }
   }
 
@@ -160,7 +168,8 @@ extension ValueProperties on FormStateHelper {
     );
 
     if (_AddProductDialogTextEditingControllers.containsKey(PriceValueKey)) {
-      _AddProductDialogTextEditingControllers[PriceValueKey]?.text = value ?? '';
+      _AddProductDialogTextEditingControllers[PriceValueKey]?.text =
+          value ?? '';
     }
   }
 
@@ -168,9 +177,11 @@ extension ValueProperties on FormStateHelper {
       this.formValueMap.containsKey(ProductNameValueKey) &&
       (productNameValue?.isNotEmpty ?? false);
   bool get hasAmount =>
-      this.formValueMap.containsKey(AmountValueKey) && (amountValue?.isNotEmpty ?? false);
+      this.formValueMap.containsKey(AmountValueKey) &&
+      (amountValue?.isNotEmpty ?? false);
   bool get hasPrice =>
-      this.formValueMap.containsKey(PriceValueKey) && (priceValue?.isNotEmpty ?? false);
+      this.formValueMap.containsKey(PriceValueKey) &&
+      (priceValue?.isNotEmpty ?? false);
 
   bool get hasProductNameValidationMessage =>
       this.fieldsValidationMessages[ProductNameValueKey]?.isNotEmpty ?? false;
@@ -181,8 +192,10 @@ extension ValueProperties on FormStateHelper {
 
   String? get productNameValidationMessage =>
       this.fieldsValidationMessages[ProductNameValueKey];
-  String? get amountValidationMessage => this.fieldsValidationMessages[AmountValueKey];
-  String? get priceValidationMessage => this.fieldsValidationMessages[PriceValueKey];
+  String? get amountValidationMessage =>
+      this.fieldsValidationMessages[AmountValueKey];
+  String? get priceValidationMessage =>
+      this.fieldsValidationMessages[PriceValueKey];
 }
 
 extension Methods on FormStateHelper {
@@ -223,7 +236,8 @@ String? getValidationMessage(String key) {
 }
 
 /// Updates the fieldsValidationMessages on the FormViewModel
-void updateValidationData(FormStateHelper model) => model.setValidationMessages({
+void updateValidationData(FormStateHelper model) =>
+    model.setValidationMessages({
       ProductNameValueKey: getValidationMessage(ProductNameValueKey),
       AmountValueKey: getValidationMessage(AmountValueKey),
       PriceValueKey: getValidationMessage(PriceValueKey),

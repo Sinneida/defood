@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   dio: ^5.8.0+1
-  envied: ^1.1.1
+  envied: ^1.2.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -26,9 +26,9 @@ dependencies:
       ref: master
   flutter_archive: ^6.0.3
   path_provider: ^2.1.5
-  file_picker: ^10.2.0
-  dynamic_color: ^1.7.0
-  google_fonts: ^6.2.1
+  file_picker: ^10.2.1
+  dynamic_color: ^1.8.1
+  google_fonts: ^6.3.0
   intl: ^0.20.2
   animations: ^2.0.11
   flutter_svg: ^2.2.0
@@ -37,11 +37,11 @@ dependencies:
   device_info_plus: ^11.5.0
   supabase_flutter: ^2.9.1
   google_sign_in: ^7.1.1
-  slang: ^4.7.3
-  slang_flutter: ^4.7.0
-  dart_mappable: ^4.5.0
+  slang: ^4.8.1
+  slang_flutter: ^4.8.0
+  dart_mappable: ^4.6.0
   flutter_expandable_fab: ^2.5.2
-  material_symbols_icons: ^4.2815.1
+  material_symbols_icons: ^4.2858.1
   openfoodfacts: ^3.24.0
   mobile_scanner: ^7.0.1
   image_picker: ^1.1.2
