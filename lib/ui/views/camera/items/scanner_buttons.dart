@@ -108,6 +108,12 @@ class SwitchCameraButton extends StatelessWidget {
             icon = const Icon(Icons.camera_front);
           case CameraFacing.back:
             icon = const Icon(Icons.camera_rear);
+          case CameraFacing.external:
+            // TODO: Handle this case.
+            throw UnimplementedError();
+          case CameraFacing.unknown:
+            // TODO: Handle this case.
+            throw UnimplementedError();
         }
 
         return IconButton(
