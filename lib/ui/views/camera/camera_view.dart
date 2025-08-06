@@ -33,7 +33,7 @@ class CameraView extends StackedView<CameraViewModel> {
         children: [
           MobileScanner(
             controller: viewModel.controller,
-            errorBuilder: (context, error, child) {
+            errorBuilder: (context, error) {
               return ScannerErrorWidget(error: error);
             },
             onDetect: (barcodes) => viewModel.handleBarcode(barcodes),

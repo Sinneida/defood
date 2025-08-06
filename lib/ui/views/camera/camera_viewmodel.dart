@@ -13,7 +13,6 @@ class CameraViewModel extends BaseViewModel with NotificationHelper, LoggerHelpe
   final controller = MobileScannerController(
     autoStart: false,
     torchEnabled: false,
-    useNewCameraSelector: false,
     formats: const [BarcodeFormat.ean13, BarcodeFormat.ean8],
   );
 
